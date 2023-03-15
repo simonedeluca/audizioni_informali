@@ -90,5 +90,187 @@ x[[1]][[7]] <- "CIGIL, CISL, UIL, SNALS-Confsal e FGU-Federazione Gilda Unams"
 x[[1]] <- append(x[[1]], "WWF, ISPRA e COMIECO", after = 7)
 x[[1]][[9]] <- "ANIEF, ANP, AND, UDIR, DISAL, ANDIS, ADI, INDIRE, INVALSI, CUN, CNR, CUNSF, Fondazione Agnelli, FIDAE, Consulte provinciali studenti e CNSU"
 
-# Pagina 3: bisogna combinare più elementi nel vettore.
+# Pagine in cui bisogna combinare più elementi del vettore. Perdiamo informazione?
+
+# Pagina 3
+a <- paste(x[[3]][[5]],x[[3]][[6]],x[[3]][[7]], sep = " ")
+x[[3]] <- x[[3]][-c(5,6,7)]
+x[[3]] <- append(x[[3]], a, after = 4)
+
+# Pagina 5
+a <- paste(x[[5]][[4]],x[[5]][[5]], sep = " ")
+x[[5]] <- x[[5]][-c(4,5)]
+x[[5]] <- append(x[[5]], a, after = 3)
+
+a <- paste(x[[5]][[7]],x[[5]][[8]], sep = " ")
+x[[5]] <- x[[5]][-c(7,8)]
+x[[5]] <- append(x[[5]], a, after = 6)
+
+# Pagina 6
+a <- paste(x[[6]][[10]],x[[6]][[11]], sep = " ")
+x[[6]] <- x[[6]][-c(10,11)]
+x[[6]] <- append(x[[6]], a, after = 9)
+
+# Pagina 8
+a <- paste(x[[8]][[3]],x[[8]][[4]], sep = " ")
+x[[8]] <- x[[8]][-c(3,4)]
+x[[8]] <- append(x[[8]], a, after = 2)
+
+a <- paste(x[[8]][[8]],x[[8]][[9]], sep = " ")
+x[[8]] <- x[[8]][-c(8,9)]
+x[[8]] <- append(x[[8]], a, after = 7)
+
+# Pagina 10
+a <- paste(x[[10]][[9]],x[[10]][[10]], sep = " ")
+x[[10]] <- x[[10]][-c(9,10)]
+x[[10]] <- append(x[[10]], a, after = 8)
+
+# Pagina 11
+x[[11]] <- append(x[[11]], "NA", after = 3)
+
+# Pagina 13
+a <- paste(x[[13]][[1]],x[[13]][[2]], sep = " ")
+x[[13]] <- x[[13]][-c(1,2)]
+x[[13]] <- append(x[[13]], a, after = 0)
+
+# Pagina 14
+a <- paste(x[[14]][[2]],x[[14]][[3]], sep = " ")
+x[[14]] <- x[[14]][-c(2,3)]
+x[[14]] <- append(x[[14]], a, after = 1)
+
+a <- paste(x[[14]][[4]],x[[14]][[5]], sep = " ")
+x[[14]] <- x[[14]][-c(4,5)]
+x[[14]] <- append(x[[14]], a, after = 3)
+
+# Pagina 15
+a <- paste(x[[15]][[6]],x[[15]][[7]], sep = " ")
+x[[15]] <- x[[15]][-c(6,7)]
+x[[15]] <- append(x[[15]], a, after = 5)
+
+a <- paste(x[[15]][[8]],x[[15]][[9]], sep = " ")
+x[[15]] <- x[[15]][-c(8,9)]
+x[[15]] <- append(x[[15]], a, after = 7)
+
+a <- paste(x[[15]][[9]],x[[15]][[10]], sep = " ")
+x[[15]] <- x[[15]][-c(9,10)]
+x[[15]] <- append(x[[15]], a, after = 8)
+
+# Pagina 16
+a <- paste(x[[16]][[2]],x[[16]][[3]], sep = " ")
+x[[16]] <- x[[16]][-c(2,3)]
+x[[16]] <- append(x[[16]], a, after = 1)
+
+a <- paste(x[[16]][[4]],x[[16]][[5]], sep = " ")
+x[[16]] <- x[[16]][-c(4,5)]
+x[[16]] <- append(x[[16]], a, after = 3)
+
+a <- paste(x[[16]][[5]],x[[16]][[6]], sep = " ")
+x[[16]] <- x[[16]][-c(5,6)]
+x[[16]] <- append(x[[16]], a, after = 4)
+
+a <- paste(x[[16]][[6]],x[[16]][[7]], sep = " ")
+x[[16]] <- x[[16]][-c(6,7)]
+x[[16]] <- append(x[[16]], a, after = 5)
+
+# Pagina 17
+a <- paste(x[[17]][[1]],x[[17]][[2]], sep = " ")
+x[[17]] <- x[[17]][-c(1,2)]
+x[[17]] <- append(x[[17]], a, after = 0)
+
+a <- paste(x[[17]][[2]],x[[17]][[3]],x[[17]][[4]], sep = " ")
+x[[17]] <- x[[17]][-c(2,3,4)]
+x[[17]] <- append(x[[17]], a, after = 1)
+
+# La variabile nomi è completa
+nomi <- x
+
+# 4. Estrazione commissioni coinvolte
+
+commissione <- vector(mode = "list", length = 17)
+
+for (page_index in 1:17) {
+  link <- paste("https://www.senato.it/Leg18/3572?current_page_29825=",page_index,"", sep = "")
+  page <- read_html(link)
+  x <- page %>% html_nodes(".strong") %>% html_text()
+  commissione[[page_index]] <- x
+  print(paste("Page:", page_index))
+  Sys.sleep(5)
+}
+
+# Integrazione dati mancanti
+
+x <- commissione
+x[[1]] <- append(x[[1]], "1ª (Aff. costituzionali", after = 0)
+x[[1]] <- append(x[[1]], "1ª (Aff. costituzionali", after = 1)
+x[[1]] <- append(x[[1]], "1ª (Aff. costituzionali", after = 9)
+
+x[[2]] <- rep("1ª (Aff. costituzionali", 10)
+
+x[[3]] <- append(x[[3]], "1ª (Aff. costituzionali", after = 0)
+a <- rep("1ª (Aff. costituzionali", 7)
+x[[3]] <- append(x[[3]], a, after = 3)
+
+a <- rep("1ª (Aff. costituzionali", 6)
+x[[4]] <- append(x[[4]], a, after = 0)
+a <- rep("1ª (Aff. costituzionali", 2)
+x[[4]] <- append(x[[4]], a, after = 8)
+
+a <- rep("1ª (Aff. costituzionali", 9)
+x[[5]] <- append(x[[5]], a, after = 0)
+
+a <- rep("1ª (Aff. costituzionali", 8)
+x[[6]] <- append(x[[6]], a, after = 2)
+
+x[[7]] <- rep("1ª (Aff. costituzionali", 10)
+
+a <- rep("1ª (Aff. costituzionali", 5)
+x[[8]] <- append(x[[8]], a, after = 0)
+a <- rep("1ª (Aff. costituzionali", 4)
+x[[8]] <- append(x[[8]], a, after = 6)
+
+x[[9]] <- rep("1ª (Aff. costituzionali", 10)
+
+a <- rep("1ª (Aff. costituzionali", 7)
+x[[10]] <- append(x[[10]], a, after = 0)
+
+a <- rep("1ª (Aff. costituzionali", 1)
+x[[11]] <- append(x[[11]], a, after = 2)
+a <- rep("1ª (Aff. costituzionali", 6)
+x[[11]] <- append(x[[11]], a, after = 4)
+
+x[[12]] <- rep("1ª (Aff. costituzionali", 10)
+
+x[[13]] <- rep("1ª (Aff. costituzionali", 10)
+
+x[[14]] <- rep("1ª (Aff. costituzionali", 9)
+
+a <- rep("1ª (Aff. costituzionali", 7)
+x[[15]] <- append(x[[15]], a, after = 0)
+a <- rep("1ª (Aff. costituzionali", 1)
+x[[15]] <- append(x[[15]], a, after = 9)
+
+x[[16]] <- rep("1ª (Aff. costituzionali", 10)
+
+a <- rep("1ª (Aff. costituzionali", 1)
+x[[17]] <- append(x[[17]], a, after = 3)
+a <- rep("1ª (Aff. costituzionali", 2)
+x[[17]] <- append(x[[17]], a, after = 7)
+
+# La variabile commissione è completa
+commissione <- x
+rm(x)
+
+# Abbiamo 4 liste (atto, commissione, data, nomi) di lunghezza uguale contenenti vettori della stessa lunghezza.
+
+a <- unlist(commissione)
+b <- unlist(nomi)
+c <- unlist(atto)
+d <- unlist(data)
+
+# Dataframe Commissione 1
+c1 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
+
+
+
+
 
