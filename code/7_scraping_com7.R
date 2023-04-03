@@ -155,3 +155,112 @@ x[[31]] <- append(x[[31]], a, after = 4)
 x[[33]][[1]] <- "7 (Pubbl. istruzione)"
 
 commissione <- x
+
+# 4. Estrazione nomi 1
+
+nomi <- vector(mode = "list", length = 33)
+
+for (page_index in 1:33) {
+  link <- paste("https://www.senato.it/Leg18/3661?current_page_40431=",page_index,"", sep = "")
+  page <- read_html(link)
+  x <- page %>% html_nodes(".sublista_docs_ul") %>% html_text()
+  nomi[[page_index]] <- x
+  print(paste("Page:", page_index))
+  Sys.sleep(5)
+}
+
+x <- nomi
+
+for (i in 1:33) {
+  x[[i]] <- gsub("[\n]", "", x[[i]]) %>% #togli new line
+    str_trim(side = "both") # togli white space all'inizio e alla fine!
+}
+
+# 5. Estrazioni nomi 2
+
+nomi2 <- vector(mode = "list", length = 33)
+
+for (page_index in 1:33) {
+  link <- paste("https://www.senato.it/Leg18/3661?current_page_40431=",page_index,"", sep = "")
+  page <- read_html(link)
+  x <- page %>% html_nodes(".titolo_pubblicato strong") %>% html_text()
+  nomi2[[page_index]] <- x
+  print(paste("Page:", page_index))
+  Sys.sleep(5)
+}
+
+y <- nomi2
+
+for (i in 1:33) {
+  y[[i]] <- gsub("[\n]", "", y[[i]]) %>% #togli new line
+    str_trim(side = "both") # togli white space all'inizio e alla fine!
+}
+
+# Integrazione nomi1 e nomi2
+
+y[[1]][10] <- x[[1]][6]
+
+y[[2]][2] <- x[[2]][1]
+
+y[[3]][8] <- x[[3]][5]
+y[[3]][9] <- x[[3]][6]
+
+y[[9]][6] <- x[[9]][6]
+
+y[[14]][9] <- x[[14]][9]
+
+y[[15]][6] <- x[[15]][5]
+
+y[[26]][8] <- x[[26]][7]
+y[[26]][10] <- x[[26]][8]
+
+a <- paste(x[[27]][[1]],x[[27]][[2]], sep = " ")
+y[[27]][2] <- a
+a <- paste(x[[27]][[3]],x[[27]][[4]], x[[27]][[5]], sep = " ")
+y[[27]][3] <- a
+y[[27]][9] <- x[[27]][8]
+
+y[[28]][8] <- x[[28]][5]
+y[[28]][7] <- x[[28]][4]
+
+y[[29]][1] <- x[[29]][1]
+y[[29]][3] <- x[[29]][3]
+a <- x[[29]][3]
+y[[29]] <- append(y[[29]], a, after = 3)
+y[[29]][7] <- x[[29]][5]
+
+y[[30]] <- append(y[[30]], "Sottosegretario di Stato alla Presidenza del Consiglio dei ministri", after = 1)
+a <- paste(x[[30]][[1]],x[[30]][[2]], sep = " ")
+y[[30]][6] <- a
+y[[30]][9] <- x[[30]][4]
+
+y[[31]][2] <- x[[31]][1]
+a <- paste(x[[31]][[2]],x[[31]][[3]], sep = " ")
+y[[31]][6] <- a
+y[[31]][7] <- x[[31]][4]
+y[[31]][8] <- x[[31]][5]
+
+a <- paste(x[[32]][[1]],x[[32]][[2]], sep = " ")
+y[[32]][1] <- a
+y[[32]][2] <- x[[32]][3]
+y[[32]][5] <- x[[32]][5]
+y[[32]][8] <- x[[32]][6]
+y[[32]][9] <- x[[32]][7]
+y[[32]][10] <- x[[32]][8]
+
+y[[33]][1] <- x[[33]][1]
+
+nomi <- y
+
+rm(x)
+rm(y)
+
+a <- unlist(commissione)
+b <- unlist(nomi)
+c <- unlist(atto)
+d <- unlist(data)
+
+# Dataframe Commissione 7
+c7 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
+
+
