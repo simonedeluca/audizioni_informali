@@ -2,6 +2,98 @@ library("rvest")
 library("dplyr")
 library("stringr")
 
+# 1. Estrazione atto
+
+atto <- vector(mode = "list", length = 19)
+
+for (page_index in 1:19) {
+  link <- paste("https://www.senato.it/Leg18/3690?current_page_40481=",page_index,"", sep = "")
+  page <- read_html(link)
+  x <- page %>% html_nodes(".descrizione em") %>% html_text()
+  atto[[page_index]] <- x
+  print(paste("Page:", page_index))
+  Sys.sleep(5)
+}
+
+x <- atto
+
+x[[1]] <- append(x[[1]], "AG N. 383", after = 5)
+x[[6]] <- append(x[[6]], "Affare assegnato sul potenziamento e riqualificazione della medicina territoriale nell'epoca post Covid (n. 569)", after = 8)
+
+atto <- x
+
+# 2. Estrazione data
+
+data <- vector(mode = "list", length = 19)
+
+for (page_index in 1:19) {
+  link <- paste("https://www.senato.it/Leg18/3690?current_page_40481=",page_index,"", sep = "")
+  page <- read_html(link)
+  x <- page %>% html_nodes(".data em") %>% html_text()
+  data[[page_index]] <- x
+  print(paste("Page:", page_index))
+  Sys.sleep(5)
+}
+
+x <- data
+
+x[[19]] <- append(x[[19]], "03 giugno 2021", after = 5)
+
+data <- x
+
+# 3. Estrazione commissioni coinvolte
+
+commissione <- vector(mode = "list", length = 19)
+
+for (page_index in 1:19) {
+  link <- paste("https://www.senato.it/Leg18/3690?current_page_40481=",page_index,"", sep = "")
+  page <- read_html(link)
+  x <- page %>% html_nodes(".strong") %>% html_text()
+  commissione[[page_index]] <- x
+  print(paste("Page:", page_index))
+  Sys.sleep(5)
+}
+
+x <- commissione
+
+a <- rep("12 (Sanità)", 2)
+x[[1]] <- append(x[[1]], a, after = 1)
+x[[1]] <- append(x[[1]], a, after = 1)
+x[[1]] <- append(x[[1]], "12 (Sanità)", after = 9)
+
+a <- rep("12 (Sanità)", 7)
+x[[2]] <- append(x[[2]], a, after = 0)
+
+a <- rep("12 (Sanità)", 5)
+x[[3]] <- append(x[[3]], a, after = 5)
+
+a <- rep("12 (Sanità)", 4)
+x[[6]] <- append(x[[6]], a, after = 0)
+a <- rep("12 (Sanità)", 5)
+x[[6]] <- append(x[[6]], a, after = 5)
+
+a <- rep("12 (Sanità)", 10)
+z <- c(4,5,7:10,12,14:18)
+
+for (i in z) {
+  x[[i]] <- a
+}
+
+a <- rep("12 (Sanità)", 4)
+x[[11]] <- append(x[[11]], a, after = 0)
+a <- rep("12 (Sanità)", 5)
+x[[11]] <- append(x[[11]], a, after = 5)
+
+a <- rep("12 (Sanità)", 5)
+x[[13]] <- append(x[[13]], a, after = 0)
+a <- rep("12 (Sanità)", 4)
+x[[13]] <- append(x[[13]], a, after = 6)
+
+a <- rep("12 (Sanità)", 6)
+x[[19]] <- append(x[[19]], a, after = 0)
+
+commissione <- x
+
 # 4. Estrazione nomi
 
 nomi <- vector(mode = "list", length = 19)
@@ -87,29 +179,55 @@ for (i in 1:19) {
 }
 
 # Strategia per pulire la colonna degli auditi
-
-a <- x[[15]]
-a <- str_squish(a) #remove more than one whitespace
-a <- gsub("\\s*\\([^\\)]+\\)"," -", a)
-a <- gsub("\\-$", "", a)
-
-a <- str_split(a, "-", simplify = TRUE)
+x <- lapply(x, str_squish)
+x <- lapply(x, function(x) gsub("\\s*\\([^\\)]+\\)"," -", x))
+x <- lapply(x, function(x) gsub("\\-$", "", x))
+x <- lapply(x, function(x) str_split(x, "-", simplify = TRUE))
+x <- lapply(x, t)
 
 my_fun <- function(x) {
   str_trim(side = "both", x)
 }
-a <- apply(a, c(1, 2), my_fun)
 
-a <- t(a)
-a <- apply(a, 2, unique)
+for (i in 1:19) {
+  x[[i]] <- apply(x[[i]], 2, my_fun)
+}
 
-a <- lapply(a, function(x) x[!x %in% ""])
+my_fun <- function(x) {
+  x[!x %in% ""]
+}
+
+for (i in 1:19) {
+  x[[i]] <- apply(x[[i]], 2, my_fun)
+}
+
+for (i in 1:19) {
+  x[[i]] <- lapply(x[[i]], unique)
+}
 
 words2 <- "^di|^del|^della|^dell'|^delle|^dei|^da|^dai|^dal|^dall'|^dalla|^dallo|^dalle"
 
-a <- lapply(a, function(x) gsub(words2, "", x))
+for (i in 1:19) {
+  x[[i]] <- lapply(x[[i]], function(x) gsub(words2, "", x))
+}
 
-a <- lapply(a, function(x) str_trim(x, side = "left"))
+for (i in 1:19) {
+  x[[i]] <- lapply(x[[i]], function(x) str_trim(x, side = "left"))
+}
 
-a <- lapply(a, function(x) paste(x, collapse = " - "))
+for (i in 1:19) {
+  x[[i]] <- lapply(x[[i]], function(x) paste(x, collapse = " - "))
+}
+
+nomi <- x
+
+a <- unlist(commissione)
+b <- unlist(nomi)
+c <- unlist(atto)
+d <- unlist(data)
+
+# Dataframe Commissione 7
+c12 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
+
+write.csv(c12, "C:/Users/pc/Desktop/Progetto Audizioni/raw_data/commissione12.csv", row.names = FALSE)
 
