@@ -113,20 +113,28 @@ for (i in 1:25) {
 a <- paste(x[[1]][[3]],x[[1]][[4]], sep = " ")
 x[[1]] <- x[[1]][-c(3,4)]
 x[[1]] <- append(x[[1]], a, after = 2)
+x[[1]][2] <- "FIDC ; ASSALCO ; FOI ; LAV ; WWF-Lipu-Legambiente"
 
 a <- paste(x[[5]][[5]],x[[5]][[6]], sep = " ")
 x[[5]] <- x[[5]][-c(5,6)]
 x[[5]] <- append(x[[5]], a, after = 4)
 
+x[[5]][5] <- "Federazione ANIMA"
+
 a <- paste(x[[9]][[5]],x[[9]][[6]], sep = " ")
 x[[9]] <- x[[9]][-c(6,7)]
 x[[9]] <- append(x[[9]], a, after = 5)
+x[[9]][6] <- "Assobibe ; Unionplast ; Federazione carta e grafica"
 
+x[[11]][3] <- "RSE ; Elettricità Futura ; Italia Solare ; ARERA"
+x[[11]][4] <- "RSE ; Elettricità Futura ; Italia Solare ; ARERA"
 a <- "Legambiente - Transport & Environment; Legambiente; Greenpeace - WWF - Legambiente - Kyoto Club - Transport & Environment"
 x[[11]][5] <- a
 x[[11]] <- append(x[[11]], a, after = 5)
 
 x[[14]][4] <- "Prof. Boero, Università degli Studi di Napoli Federico II"
+
+x[[16]][4] <- "FAI-INU-Slow Food Italia-WWF"
 
 x[[17]][8] <- "Assoporti"
 x[[17]][9] <- "Ispra"
@@ -146,10 +154,13 @@ x[[21]] <- append(x[[21]], a, after = 8)
 a <- paste(x[[21]][[10]],x[[21]][[11]], sep = " ")
 x[[21]] <- x[[21]][-c(10,11)]
 x[[21]] <- append(x[[21]], a, after = 9)
-x[[21]][3] <- "Confindustria - Istituto Nazionale Urbanistica - Coldiretti - Confagricoltura - Copagri"
+
+x[[21]][3] <- "Confindustria ; Istituto Nazionale Urbanistica ; Coldiretti ; Confagricoltura ; Copagri"
 x[[21]][4] <- "Corte dei conti ; ANCE ; Rete delle Professioni Tecniche ; ANCI ; UPI ; Conferenza delle regioni e delle province autonome ; INAIL"
 x[[21]][5] <- "Confindustria ; CNA Nazionale ; Confcommercio ; Finco ; Alleanza delle cooperative italiane ; Assoimmobiliare ; Confedilizia ; Confartigianato; FILLEA-CGIL - FILCA-CISL - FENEAL-UIL ; CGIL-CISL-UIL"
-X[[21]][6] <- "FILLEA-CGIL ; prof. Paolo Maddalena, Vice Presidente emerito della Corte Costituzionale ; Forum nazionale 'salviamo il paesaggio - difendiamo i territori'"
+x[[21]][6] <- "FILLEA-CGIL ; prof. Paolo Maddalena, Vice Presidente emerito della Corte Costituzionale ; Forum nazionale 'salviamo il paesaggio-difendiamo i territori'"
+x[[21]][9] <- "Prof.ssa Adriana Galderisi, Professore associato di Tecnica e Pianificazione Urbanistica dell'Università degli Studi della Campania Vanvitelli ; Prof. Carmelo Dazzi, Professore di Scienze Agrarie dell'Università degli Studi di Palermo"
+x[[21]][10] <- "Prof. Paolo Pileri, Professore ordinario di pianificazione e progettazione urbanistica del Politecnico di Milano ;  Prof. Giuseppe Corti, Professore ordinario di Pedologia-Dipartimento di Scienze agrarie, alimentari e ambientali dell'Università Politecnica delle Marche ; Prof. Carlo Berizzi, Associated Professor in Architectural and Urban Design-Coordinator for International Mobility-Faculty of Engineering dell'Università degli Studi di Pavia ; Prof.ssa Simona Tondelli, Professore associato di tecnica e pianificazione urbanistica-Dipartimento di Architettura dell'Università degli Studi di Bologna"
 
 a <- paste(x[[22]][[4]],x[[22]][[5]], sep = " ")
 x[[22]] <- x[[22]][-c(4,5)]
@@ -161,6 +172,12 @@ a <- paste(x[[22]][[10]],x[[22]][[11]], sep = " ")
 x[[22]] <- x[[22]][-c(10,11)]
 x[[22]] <- append(x[[22]], a, after = 9)
 
+x[[22]][1] <- "Prof. Fabio Castelli, Presidente della Scuola di ingegneria e ordinario di idrologia e costruzioni idrauliche dell'Università degli Studi di Firenze ; Prof. Terribile, Professore di pedologia dell'Università degli Studi Federico II di Napoli"
+x[[22]][3] <- "Mountain Wilderness Italia ; Federdistribuzione"
+x[[22]][5] <- "Alleanza delle cooperative italiane ; UECOOP ; UNCI Agroalimentare ; Consiglio Nazionale della Green Economy"
+x[[22]][6] <- "Associazione Nazionale Piccoli Comuni d'Italia ; Cisambiente"
+x[[22]][10] <- "CIA ; Associazione italiana per la wilderness ; Gruppo di intervento giuridico ; Accademia italiana di Permacultura"
+
 a <- paste(x[[23]][[2]],x[[23]][[3]], sep = " ")
 x[[23]] <- x[[23]][-c(2,3)]
 x[[23]] <- append(x[[23]], a, after = 1)
@@ -168,9 +185,76 @@ a <- paste(x[[23]][[3]],x[[23]][[4]], sep = " ")
 x[[23]] <- x[[23]][-c(3,4)]
 x[[23]] <- append(x[[23]], a, after = 2)
 
-words_to_remove <- "Documentazione|fornita|da rappresentanti|relatore|Audizione|informale|Memoria -|Documento|trasmesso|depositato|trasmessa|Memoria depositata|Slide presentazione|audizione|- Allegato documento|Proposte modifica decreto|congiunto|- Documentazione|acquisita|DOCUMENTAZIONE|- Memoria|Presentazione"
+x[[23]] <- c("VAS Verdi Ambiente e Società", "Città amica", "Istat", "ANCE", "ISPRA", "Rete Professioni Tecniche", "Dott.ssa Gaia Checcucci, Direzione generale per la salvaguardia del territorio e delle acque del Ministero dell'ambiente e della tutela del territorio e del mare", "Dott.ssa Silvana Salvati, ISPRA", "Dott. Giovanni Balestri, consulente tecnico ecoreati", "Prof. Campanile, Università Federico II")
 
 
+words_to_remove <- "Documentazione|fornita|da rappresentanti|relatore|Audizione|informale|Memoria -|Documento|trasmesso|depositato|trasmessa|Memoria depositata|Slide presentazione|audizione|- Allegato documento|Proposte modifica decreto|congiunto|- Documentazione|acquisita|DOCUMENTAZIONE|- Memoria|Memoria|Presentazione|inviata"
+
+for (i in 1:25) {
+  x[[i]] <- gsub(words_to_remove, "", x[[i]]) %>%
+    str_trim(side = "left")
+}
+
+# Strategia per pulire la colonna degli auditi
+x <- lapply(x, str_squish)
+x <- lapply(x, function(x) gsub("\\s*\\([^\\)]+\\)"," ;", x))
+x <- lapply(x, function(x) gsub("\\;$", "", x))
+x <- lapply(x, function(x) str_split(x, ";", simplify = TRUE))
+x <- lapply(x, t)
+
+my_fun <- function(x) {
+  str_trim(side = "both", x)
+}
+
+for (i in 1:25) {
+  x[[i]] <- apply(x[[i]], 2, my_fun)
+}
+
+my_fun <- function(x) {
+  x[!x %in% ""]
+}
+
+z <- c(1,6,9:12,16,20:22)
+
+for (i in z) {
+  x[[i]] <- apply(x[[i]], 2, my_fun)
+}
+
+words2 <- "^di|^del|^della|^dell'|^delle|^dei|^da|^dai|^dal|^dall'|^dalla|^dallo|^dalle"
+
+for (i in z) {
+  x[[i]] <- lapply(x[[i]], function(x) gsub(words2, "", x))
+}
+
+for (i in z) {
+  x[[i]] <- lapply(x[[i]], function(x) str_trim(x, side = "left"))
+}
+
+for (i in z) {
+  x[[i]] <- lapply(x[[i]], function(x) paste(x, collapse = " ; "))
+}
+
+z <- c(2:5, 7,8, 13:15, 17:19, 23:25)
+
+for (i in z) {
+  x[[i]] <- lapply(x[[i]], function(x) gsub(words2, "", x))
+}
+
+for (i in z) {
+  x[[i]] <- lapply(x[[i]], function(x) str_trim(x, side = "left"))
+}
+
+nomi <- x
+
+a <- unlist(commissione)
+b <- unlist(nomi)
+c <- unlist(atto)
+d <- unlist(data)
+
+# Dataframe Commissione 13
+c13 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
+
+write.csv(c13, "C:/Users/pc/Desktop/Progetto Audizioni/raw_data/commissione13.csv", row.names = FALSE)
 
 
 
