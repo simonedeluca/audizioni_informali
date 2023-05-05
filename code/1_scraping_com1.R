@@ -47,10 +47,10 @@ atto[[5]] <- x
 
 atto[[7]]
 x <- atto[[7]]
-x <- append(x, "NA", after = 3)
+x <- append(x, "Atto n. 775 - Passaporto vaccinale", after = 3)
 atto[[7]] <- x
 
-atto[[12]] <- append(atto[[12]], "NA", after = 8)
+atto[[12]] <- append(atto[[12]], "A.S. n. 1144", after = 8)
 
 # 3. Estrazione auditi
 
@@ -83,12 +83,12 @@ for (i in 1:17) {
 # 3.2 Integrazione mancanti
 
 # Pagina 1
-x[[1]] <- append(x[[1]], "dottor Paolo de Rosa e del professor Michele Belletti", after = 3)
-x[[1]][[5]] <- "Conferenza delle Regioni e delle Province autonome, UPI, ANPCI, Confcommercio, Confprofessioni, ANCE, OICE, FINCO, Fondazione Italia Digitale, AGDP, CODIRP, ANMIL, Comitato NO riforma Concorsi PA e Save the Children"
-x[[1]][[6]] <- "AGE, APEI, ANCODIS, CNAM, ANFIS, SIPED, CIDI e del prof. Eugenio Prosperetti"
-x[[1]][[7]] <- "CIGIL, CISL, UIL, SNALS-Confsal e FGU-Federazione Gilda Unams"
-x[[1]] <- append(x[[1]], "WWF, ISPRA e COMIECO", after = 7)
-x[[1]][[9]] <- "ANIEF, ANP, AND, UDIR, DISAL, ANDIS, ADI, INDIRE, INVALSI, CUN, CNR, CUNSF, Fondazione Agnelli, FIDAE, Consulte provinciali studenti e CNSU"
+x[[1]] <- append(x[[1]], "dottor Paolo de Rosa ; professor Michele Belletti", after = 3)
+x[[1]][[5]] <- "Conferenza delle Regioni e delle Province autonome ; UPI ; ANPCI ; Confcommercio ; Confprofessioni ; ANCE ; OICE ; FINCO ; Fondazione Italia Digitale ; AGDP ; CODIRP ; ANMIL ; Comitato NO riforma Concorsi PA ; Save the Children"
+x[[1]][[6]] <- "AGE ; APEI ; ANCODIS ; CNAM ; ANFIS ; SIPED ; CIDI ; prof. Eugenio Prosperetti"
+x[[1]][[7]] <- "CIGIL ; CISL ; UIL ; SNALS-Confsal ; FGU-Federazione Gilda Unams"
+x[[1]] <- append(x[[1]], "WWF ; ISPRA ; COMIECO", after = 7)
+x[[1]][[9]] <- "ANIEF ; ANP ; AND ; UDIR ; DISAL ; ANDIS ; ADI ; INDIRE ; INVALSI ; CUN ; CNR ; CUNSF ; Fondazione Agnelli ; FIDAE ; Consulte provinciali studenti ; CNSU"
 
 # Pagine in cui bisogna combinare più elementi del vettore. Perdiamo informazione?
 
@@ -126,7 +126,7 @@ x[[10]] <- x[[10]][-c(9,10)]
 x[[10]] <- append(x[[10]], a, after = 8)
 
 # Pagina 11
-x[[11]] <- append(x[[11]], "NA", after = 3)
+x[[11]] <- append(x[[11]], "Francesco Paorici, Direttore generale dell'Agenzia per l'Italia Digitale", after = 3)
 
 # Pagina 13
 a <- paste(x[[13]][[1]],x[[13]][[2]], sep = " ")
@@ -200,60 +200,60 @@ for (page_index in 1:17) {
 # Integrazione dati mancanti
 
 x <- commissione
-x[[1]] <- append(x[[1]], "1ª (Aff. costituzionali", after = 0)
-x[[1]] <- append(x[[1]], "1ª (Aff. costituzionali", after = 1)
-x[[1]] <- append(x[[1]], "1ª (Aff. costituzionali", after = 9)
+x[[1]] <- append(x[[1]], "1 (Aff. costituzionali)", after = 0)
+x[[1]] <- append(x[[1]], "1 (Aff. costituzionali)", after = 1)
+x[[1]] <- append(x[[1]], "1 (Aff. costituzionali)", after = 9)
 
-x[[2]] <- rep("1ª (Aff. costituzionali", 10)
+x[[2]] <- rep("1 (Aff. costituzionali)", 10)
 
-x[[3]] <- append(x[[3]], "1ª (Aff. costituzionali", after = 0)
-a <- rep("1ª (Aff. costituzionali", 7)
+x[[3]] <- append(x[[3]], "1 (Aff. costituzionali)", after = 0)
+a <- rep("1 (Aff. costituzionali)", 7)
 x[[3]] <- append(x[[3]], a, after = 3)
 
-a <- rep("1ª (Aff. costituzionali", 6)
+a <- rep("1 (Aff. costituzionali)", 6)
 x[[4]] <- append(x[[4]], a, after = 0)
-a <- rep("1ª (Aff. costituzionali", 2)
+a <- rep("1 (Aff. costituzionali)", 2)
 x[[4]] <- append(x[[4]], a, after = 8)
 
-a <- rep("1ª (Aff. costituzionali", 9)
+a <- rep("1 (Aff. costituzionali)", 9)
 x[[5]] <- append(x[[5]], a, after = 0)
 
-a <- rep("1ª (Aff. costituzionali", 8)
+a <- rep("1 (Aff. costituzionali)", 8)
 x[[6]] <- append(x[[6]], a, after = 2)
 
-x[[7]] <- rep("1ª (Aff. costituzionali", 10)
+x[[7]] <- rep("1 (Aff. costituzionali)", 10)
 
-a <- rep("1ª (Aff. costituzionali", 5)
+a <- rep("1 (Aff. costituzionali)", 5)
 x[[8]] <- append(x[[8]], a, after = 0)
-a <- rep("1ª (Aff. costituzionali", 4)
+a <- rep("1 (Aff. costituzionali)", 4)
 x[[8]] <- append(x[[8]], a, after = 6)
 
-x[[9]] <- rep("1ª (Aff. costituzionali", 10)
+x[[9]] <- rep("1 (Aff. costituzionali)", 10)
 
-a <- rep("1ª (Aff. costituzionali", 7)
+a <- rep("1 (Aff. costituzionali)", 7)
 x[[10]] <- append(x[[10]], a, after = 0)
 
-a <- rep("1ª (Aff. costituzionali", 1)
+a <- rep("1 (Aff. costituzionali)", 1)
 x[[11]] <- append(x[[11]], a, after = 2)
-a <- rep("1ª (Aff. costituzionali", 6)
+a <- rep("1 (Aff. costituzionali)", 6)
 x[[11]] <- append(x[[11]], a, after = 4)
 
-x[[12]] <- rep("1ª (Aff. costituzionali", 10)
+x[[12]] <- rep("1 (Aff. costituzionali)", 10)
 
-x[[13]] <- rep("1ª (Aff. costituzionali", 10)
+x[[13]] <- rep("1 (Aff. costituzionali)", 10)
 
-x[[14]] <- rep("1ª (Aff. costituzionali", 9)
+x[[14]] <- rep("1 (Aff. costituzionali)", 9)
 
-a <- rep("1ª (Aff. costituzionali", 7)
+a <- rep("1 (Aff. costituzionali)", 7)
 x[[15]] <- append(x[[15]], a, after = 0)
-a <- rep("1ª (Aff. costituzionali", 1)
+a <- rep("1 (Aff. costituzionali)", 1)
 x[[15]] <- append(x[[15]], a, after = 9)
 
-x[[16]] <- rep("1ª (Aff. costituzionali", 10)
+x[[16]] <- rep("1 (Aff. costituzionali)", 10)
 
-a <- rep("1ª (Aff. costituzionali", 1)
+a <- rep("1 (Aff. costituzionali)", 1)
 x[[17]] <- append(x[[17]], a, after = 3)
-a <- rep("1ª (Aff. costituzionali", 2)
+a <- rep("1 (Aff. costituzionali)", 2)
 x[[17]] <- append(x[[17]], a, after = 7)
 
 # La variabile commissione è completa
@@ -269,8 +269,3 @@ d <- unlist(data)
 
 # Dataframe Commissione 1
 c1 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
-
-
-
-
-
