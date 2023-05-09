@@ -22,7 +22,7 @@ for (page_index in 1:13) {
 
 atto[[5]] <- append(atto[[5]], "AUDIZIONI INFORMALI NELL'AMBITO DELL'ESAME DEL DISEGNO DI LEGGE N. 2086 (ISTIGAZIONE ALL'AUTOLESIONISMO)", after = 6)
 atto[[6]] <- append(atto[[6]], "AUDIZIONI INFORMALI NELL'AMBITO DELL'ESAME DEI DISEGNI DI LEGGE NN. 2005 E 2205 (CONTRASTO DELLA DISCCRIMINAZIONE O VIOLENZA PER SESSO, GENERE O DISABILITA')", after = 2)
-atto[[9]] <- append(atto[[9]], "NA", after = 0)
+atto[[9]] <- append(atto[[9]], "ESAME DDL N. 76-81-298-360-1030-1078-1344-1356 TUTELA ANIMALI", after = 0)
 atto[[9]] <- append(atto[[9]], "AUDIZIONI INFORMALI NELL'AMBITO DELL'ESAME DEI DISEGNI DI LEGGE NN. 1438, 1516, 1555, 1582 e 1714 (MAGISTRATURA ONORARIA)", after = 3)
 
 # 2. Estrazione data.
@@ -38,8 +38,8 @@ for (page_index in 1:13) {
   Sys.sleep(5)
 }
 
-x <- rep("NA", 2)
-data[[9]] <- append(data[[9]], x, after = 0)
+data[[9]] <- append(data[[9]], "NA", after = 0)
+data[[9]] <- append(data[[9]], "27 Novembre 2019", after = 1)
 
 x <- page %>% html_nodes(".data_ricezione_documento em") %>% html_text()
 data[[13]] <- append(data[[13]], x, after = 1)
@@ -58,49 +58,49 @@ for (page_index in 1:13) {
   Sys.sleep(5)
 }
 
-x <- rep("2ª Giustizia", 3)
+x <- rep("2 (Giustizia)", 3)
 commissione[[1]] <- append(commissione[[1]], x, after = 0)
-x <- rep("2ª Giustizia", 6)
+x <- rep("2 (Giustizia)", 6)
 commissione[[1]] <- append(commissione[[1]], x, after = 4)
 
-commissione[[2]] <- append(commissione[[2]], "2ª Giustizia", after = 0)
+commissione[[2]] <- append(commissione[[2]], "2 (Giustizia)", after = 0)
 
-x <- rep("2ª Giustizia", 4)
+x <- rep("2 (Giustizia)", 4)
 commissione[[4]] <- append(commissione[[4]], x, after = 6)
 
-x <- rep("2ª Giustizia", 2)
+x <- rep("2 (Giustizia)", 2)
 commissione[[5]] <- append(commissione[[5]], x, after = 6)
 
-commissione[[6]] <- append(commissione[[6]], "2ª Giustizia", after = 0)
-x <- rep("2ª Giustizia", 7)
+commissione[[6]] <- append(commissione[[6]], "2 (Giustizia)", after = 0)
+x <- rep("2 (Giustizia)", 7)
 commissione[[6]] <- append(commissione[[6]], x, after = 2)
 
-commissione[[7]] <- append(commissione[[7]], "2ª Giustizia", after = 0)
-x <- rep("2ª Giustizia", 8)
+commissione[[7]] <- append(commissione[[7]], "2 (Giustizia)", after = 0)
+x <- rep("2 (Giustizia)", 8)
 commissione[[7]] <- append(commissione[[7]], x, after = 2)
 
-x <- rep("2ª Giustizia", 9)
+x <- rep("2 (Giustizia)", 9)
 commissione[[8]] <- append(commissione[[8]], x, after = 1)
 
-commissione[[9]] <- rep("2ª Giustizia", 10)
+commissione[[9]] <- rep("2 (Giustizia)", 10)
 
-x <- rep("2ª Giustizia", 2)
+x <- rep("2 (Giustizia)", 2)
 commissione[[10]] <- append(commissione[[10]], x, after = 0)
-commissione[[10]] <- append(commissione[[10]], "2ª Giustizia", after = 3)
-x <- rep("2ª Giustizia", 5)
+commissione[[10]] <- append(commissione[[10]], "2 (Giustizia)", after = 3)
+x <- rep("2 (Giustizia)", 5)
 commissione[[10]] <- append(commissione[[10]], x, after = 5)
 
-x <- rep("2ª Giustizia", 4)
+x <- rep("2 (Giustizia)", 4)
 commissione[[11]] <- append(commissione[[11]], x, after = 0)
-x <- rep("2ª Giustizia", 5)
+x <- rep("2 (Giustizia)", 5)
 commissione[[11]] <- append(commissione[[11]], x, after = 5)
 
-commissione[[12]] <- rep("2ª Giustizia", 10)
+commissione[[12]] <- rep("2 (Giustizia)", 10)
 
-commissione[[13]] <- append(commissione[[13]], "2ª Giustizia", after = 0)
-x <- rep("2ª Giustizia", 2)
+commissione[[13]] <- append(commissione[[13]], "2 (Giustizia)", after = 0)
+x <- rep("2 (Giustizia)", 2)
 commissione[[13]] <- append(commissione[[13]], x, after = 3)
-commissione[[13]] <- append(commissione[[13]], "2ª Giustizia", after = 6)
+commissione[[13]] <- append(commissione[[13]], "2 (Giustizia)", after = 6)
 
 # 4. Estrazione auditi.
 
@@ -138,11 +138,11 @@ x[[1]] <- x[[1]][-c(8,9,10)]
 x[[1]] <- append(x[[1]], a, after = 7)
 
 
-a <- "Società Italiana per l'Ingegneria Culturale; MEDIASET; Capitolo Italiano Creative Commons e Wikimedia Italia; Autorità per le garanzie nelle Comunicazioni"
+a <- "Società Italiana per l'Ingegneria Culturale ; MEDIASET ; Capitolo Italiano Creative Commons-Wikimedia Italia ; Autorità per le garanzie nelle Comunicazioni"
 x[[5]] <- append(x[[5]], a, after = 3)
-a <- "Dott. Marco Giorello, Commissione europea - DG CONNECT; prof. Gustavo Ghidini, Università degli Studi di Milano; SIAE Società Italiana degli Autori ed Editori; FIEG Federazione Italiana Editori Giornali; UNIVIDEO Unione Italiana Editoria Audiovisiva Media Digitali e Online; FAPAV Federazione per la tutela dei contenuti audiovisivi e multimediali; FIMI Federazione Industria Musicale Italiana; FEM Federazione Editori Musicali; USPI Unione Stampa Periodica Italiana"
+a <- "Dott. Marco Giorello, Commissione europea - DG CONNECT ; prof. Gustavo Ghidini, Università degli Studi di Milano ; SIAE (Società Italiana degli Autori ed Editori) ; FIEG (Federazione Italiana Editori Giornali) ; UNIVIDEO (Unione Italiana Editoria Audiovisiva Media Digitali e Online) ; FAPAV (Federazione per la tutela dei contenuti audiovisivi e multimediali) ; FIMI (Federazione Industria Musicale Italiana) ; FEM (Federazione Editori Musicali) ; USPI (Unione Stampa Periodica Italiana)"
 x[[5]] <- append(x[[5]], a, after = 4)
-a <- "Nuovo IMAIE; AIE (Associazione italiana Editori); ITSRIGHT; Artisti 7607; LEA (Liberi Editori e Autori); AISA (Associazione Italiana per la promozione della Scienza Aperta)"
+a <- "Nuovo IMAIE ; AIE (Associazione italiana Editori) ; ITSRIGHT ; Artisti 7607 ; LEA (Liberi Editori e Autori) ; AISA (Associazione Italiana per la promozione della Scienza Aperta)"
 x[[5]] <- append(x[[5]], a, after = 5)
 
 a <- paste(x[[6]][[3]],x[[6]][[4]], sep = " ")
