@@ -48,14 +48,34 @@ for (i in y) {
   h <- p[i]
   output <- c(output, h)
 }
-# single_name[output] <- x[y]
+
 for (i in y) {
-  single_name[output] <- x[i]
+  single_name[output] <- x[y]
+}
+
+p <- str_extract(single_name, "-")
+p <- which(p == "-")
+x <- str_subset(single_name, "-")
+
+y <- c(2,4,6:8,10:14,16:21,24,25,27)
+for (i in y) {
+  x[i] <- gsub("-", " ", x[i])
+}
+
+output <- c()
+for (i in y) {
+  h <- p[i]
+  output <- c(output, h)
+}
+
+for (i in y) {
+  single_name[output] <- x[y]
 }
 
 single_name <- gsub("_",",", single_name)
 single_name[108] <- "Corte dei Conti"
-single_name <- gsub("\\;$", "", single_name) %>% str_trim(side = "both")
+single_name[164] <- "Francesco Paorici, Direttore generale AGID Agenzia per l'Italia Digitale"
+single_name <- gsub("\\;$", "", single_name) %>% str_squish()
 
 c1$times <- m[,1]
 
@@ -92,3 +112,5 @@ x$month <- with(x, ifelse(V2 %in% "Gennaio", 1,
 date <- paste(x$V1,x$month,x$V3, sep= "-")
 new_data <- subset(new_data, select = -DATA)
 new_data$DATA <- as.Date(date, format="%d-%m-%y")
+
+write.csv(new_data, "C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data/C1.csv", row.names = FALSE)
