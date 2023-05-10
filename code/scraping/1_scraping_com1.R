@@ -22,7 +22,11 @@ for (page_index in 1:17) {
   Sys.sleep(5)
 }
 
-data[[17]] <- rep("NA", 10) #si può interpretare il dato mancante?
+link <- "https://www.senato.it/Leg18/3572?current_page_29825=17"
+page <- read_html(link)
+x <- page %>% html_nodes(".data_ora_inizio a") %>% html_text()
+x <- gsub("del ", "", x)
+data[[17]] <- x
 
 # 2. Estrazione atti su cui vertono le audizioni.
 
