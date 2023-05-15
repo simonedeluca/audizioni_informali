@@ -23,7 +23,7 @@ x[[2]] <- append(x[[2]], a, after = 2)
 a <- "Rapporto economico 2021 sull'Italia"
 x[[6]] <- append(x[[6]], a, after = 5)
 
-x[[10]] <- append(x[[10]], "NA", after = 5)
+x[[10]] <- append(x[[10]], "A.S. 2144 - Conversione in legge del decreto-legge 22 marzo 2021, n. 41, recante misure urgenti in materia di sostegno alle imprese e agli operatori economici, di lavoro, salute e servizi territoriali, connesse all'emergenza da COVID-19", after = 5)
 
 a <- "Relazione al Parlamento predisposta ai sensi dell’articolo 6 della L. 243/2012"
 x[[13]] <- append(x[[13]], a, after = 4)
@@ -39,7 +39,7 @@ x[[16]] <- append(x[[16]], a, after = 8)
 a <- "Misure economiche adottate dal Governo per fronteggiare l'emergenza da COVID-19"
 x[[17]] <- append(x[[17]], a, after = 2)
 
-a <- "A.S. 728 - Relazione tecnica"
+a <- "A.S. 728 - Norme per la valorizzazione delle piccole produzioni agroalimentari di origine locale. Relazione tecnica"
 x[[23]] <- append(x[[23]], a, after = 0)
 
 atto <- x
@@ -61,7 +61,7 @@ x <- data
 
 x[[19]] <- x[[19]][-3]
 
-x[[25]][[9]] <- "18 maggio 2022"
+x[[25]][[9]] <- "18 Maggio 2022"
 
 data <- x
 
@@ -134,16 +134,16 @@ x[[14]] <- append(x[[14]], a, after = 4)
 
 a <- rep("5 (Bilancio)", 5)
 x[[15]] <- append(x[[15]], a, after = 5)
-x[[15]][[8]] <- "Uffici di presidenza 5 e 14 Senato e V e XIV Camera"
+x[[15]][[8]] <- "5 (Bilancio) ; 14 (Politiche dell'UE) ; V (Bilancio) ; XIV (Politiche dell'UE)"
 
 x[[16]] <- rep("5 (Bilancio)", 10)
-x[[16]][[9]] <- "Uffici di presidenza congiunti 5 e V"
+x[[16]][[9]] <- "5 (Bilancio) ; V (Bilancio)"
 
 a <- rep("5 (Bilancio)", 5)
 x[[17]] <- append(x[[17]], a, after = 0)
 a <- rep("5 (Bilancio)", 4)
 x[[17]] <- append(x[[17]], a, after = 6)
-x[[17]][[3]] <- "Uffici di Presidenza integrati 5 Senato e V Camera"
+x[[17]][[3]] <- "5 (Bilancio) ; V (Bilancio)"
    
 a <- rep("5 (Bilancio)", 7)
 x[[18]] <- append(x[[18]], a, after = 0)
@@ -174,8 +174,8 @@ a <- rep("5 (Bilancio)", 4)
 x[[24]] <- append(x[[24]], a, after = 6)
 
 x[[25]] <- rep("5 (Bilancio)", 9)
-x[[25]][[7]] <- "Uffici Presidenza integrati 5 e V"
-x[[25]][[8]] <- "Uffici Presidenza integrati 5 e V"
+x[[25]][[7]] <- "5 (Bilancio) ; V (Bilancio)"
+x[[25]][[8]] <- "5 (Bilancio) ; V (Bilancio)"
 
 commissione <- x
 
@@ -206,6 +206,7 @@ x[[2]] <- append(x[[2]], a, after = 2)
 x[[3]] <- append(x[[3]], "Maria Rosaria Carfagna, Ministro per il Sud e la Coesione territoriale", after = 2)
 
 x[[4]] <- append(x[[4]], "Andrea Orlando, Ministro del lavoro e delle politiche sociali", after = 2)
+x[[4]][8] <- "Daniele Franco, ministro dell'economia e delle finanze"
 
 a <- paste(x[[5]][[5]],x[[5]][[6]], sep = " ")
 x[[5]] <- x[[5]][-c(5,6)]
@@ -217,7 +218,7 @@ x[[5]] <- append(x[[5]], a, after = 7)
 
 x[[6]] <- append(x[[6]], "NA", after = 8)
 
-x[[8]] <- append(x[[8]], "Laura Castelli, vice ministro dell'economia e delle finanze; dottor Carmine Di Nuzzo, dirigente della Ragioneria generale dello Stato; dottoressa Nunzia Vecchione, dirigente della Ragioneria generale dello Stato", after = 7)
+x[[8]] <- append(x[[8]], "Laura Castelli, vice ministro dell'economia e delle finanze ; Carmine Di Nuzzo, dirigente della Ragioneria generale dello Stato ; Nunzia Vecchione, dirigente della Ragioneria generale dello Stato", after = 7)
 
 a <- paste(x[[9]][[1]],x[[9]][[2]], sep = " ")
 x[[9]] <- x[[9]][-c(1,2)]
@@ -248,8 +249,8 @@ x[[15]] <- append(x[[15]], a, after = 8)
 a <- paste(x[[15]][[10]],x[[15]][[11]], x[[15]][[12]], sep = " ")
 x[[15]] <- x[[15]][-c(10,11,12)]
 x[[15]] <- append(x[[15]], a, after = 9)
-x[[15]][[3]] <- "Banca d'Italia, ASSAEROPORTI, Assonime, Ance, CONFAPI, CNA (Confederazione nazionale dell'artigianato e della piccola e media impresa), Confartigianato Imprese, Confersercenti, Confcommercio Imprese per l'Italia, Casartigiani, CONFPROFESSIONI, Alleanza delle Cooperative italiane, FEDERDISTRIBUZIONE, Confagricoltura, CIA-Agricoltori italiani, Coldiretti e Filiera Italia, Copagri, CONFETRA e ANIA"
-x[[15]][[4]] <- "ABI e Confindustria"
+x[[15]][[3]] <- "Banca d'Italia ; ASSAEROPORTI ; Assonime ; Ance ; CONFAPI ; CNA (Confederazione nazionale dell'artigianato e della piccola e media impresa) ; Confartigianato Imprese ; Confersercenti ; Confcommercio Imprese per l'Italia ; Casartigiani ; CONFPROFESSIONI ; Alleanza delle Cooperative italiane ; FEDERDISTRIBUZIONE ; Confagricoltura ; CIA Agricoltori italiani ; Coldiretti-Filiera Italia ; Copagri ; CONFETRA ; ANIA"
+x[[15]][[4]] <- "ABI ; Confindustria"
 
 x[[16]] <- append(x[[16]], "Roberto Gualtieri, Ministro dell'economia e delle finanze", after = 8)
 
@@ -293,3 +294,6 @@ d <- unlist(data)
 
 # Dataframe Commissione 5
 c5 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
+
+write.csv(c5, "C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione5.csv", row.names = FALSE)
+
