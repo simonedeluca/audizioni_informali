@@ -22,17 +22,25 @@ for (page_index in 1:8) {
 
 x <- atto
 
-x[[4]][[2]] <- "NA"
+x[[2]][[3]] <- "Audizioni informali sulla crisi in Afghanistan e sui possibili scenari successivi"
+x[[2]][[5]] <- "Audizioni informali sulla crisi in Afghanistan e sui possibili scenari successivi"
+x[[2]][[6]] <- "Audizioni informali sulla crisi in Afghanistan e sui possibili scenari successivi"
+x[[2]][[7]] <- "Audizioni informali sulla crisi in Afghanistan e sui possibili scenari successivi"
 
-x[[5]][[3]] <- "NA"
+x[[3]][5] <- "Audizioni informali sull'Accordo quadro per gli investimenti UE-Cina"
+
+x[[4]][[2]] <- "La posizione dell'Azerbaigian sulla questione armena"
+
+x[[5]][[3]] <- "Il ruolo del Canton Ticino nell’ambito delle relazioni transfrontaliere e bilaterali tra Svizzera e Italia"
 x[[5]][[4]] <- "Expo 2020 Dubai"
-a <- rep("NA", 2)
-x[[5]] <- append(x[[5]], a, after = 7)
 
-x[[6]] <- append(x[[6]], "NA", after = 2)
-x[[6]] <- append(x[[6]], "NA", after = 6)
+x[[5]] <- append(x[[5]], "Il futuro delle relazioni tra l'Italia e la Federazione russa", after = 7)
+x[[5]] <- append(x[[5]], "L'Italia nel contesto geopolitico", after = 8)
 
-x[[7]] <- append(x[[7]], "NA", after = 1)
+x[[6]] <- append(x[[6]], "Il futuro delle relazioni tra l'Italia e la Federazione russa", after = 2)
+x[[6]] <- append(x[[6]], "Il futuro delle relazioni tra l'Italia e la Federazione russa", after = 6)
+
+x[[7]] <- append(x[[7]], "Il futuro delle relazioni tra l'Italia e la Federazione russa", after = 1)
 
 atto <- x
 
@@ -51,8 +59,7 @@ for (page_index in 1:8) {
 
 x <- data
 
-a <- page %>% html_nodes(".data_ricezione_documento em") %>% html_text()
-x[[8]] <- append(x[[8]], a, after = 1)
+x[[8]] <- append(x[[8]], c("15 Giugno 2021", "9 Giugno 2021", "8 Giugno 2021"), after = 1)
 
 data <- x
 
@@ -60,29 +67,29 @@ data <- x
 
 x <- vector(mode = "list", length = 8)
 
-x[[1]] <- rep("3 (Aff. esteri, emigrazione)", 10)
-x[[1]][[10]] <- "Uffici di Presidenza Commissioni 3 e 4 riunite"
+x[[1]] <- rep("3 (Aff. esteri)", 10)
+x[[1]][[10]] <- "3 (Aff. esteri) ; 4 (Difesa)"
 
-x[[2]] <- rep("3 (Aff. esteri, emigrazione)", 10)
-x[[2]][[1]] <- "Uffici di Presidenza Commissioni 3 e 4 riunite"
-x[[2]][[4]] <- "Uffici di Presidenza Commissioni 3 e 4 riunite"
-x[[2]][[3]] <- "Uffici di Presidenza Commissioni congiunte 3 e 4 Senato e III e IV Camera"
-x[[2]][[5]] <- "Uffici di Presidenza Commissioni congiunte 3 e 4 Senato e III e IV Camera"
-x[[2]][[6]] <- "Uffici di Presidenza Commissioni congiunte 3 e 4 Senato e III e IV Camera"
-x[[2]][[7]] <- "Uffici di Presidenza Commissioni congiunte 3 e 4 Senato e III e IV Camera"
+x[[2]] <- rep("3 (Aff. esteri)", 10)
+x[[2]][[1]] <- "3 (Aff. esteri) ; 4 (Difesa)"
+x[[2]][[4]] <- "3 (Aff. esteri) ; 4 (Difesa)"
+x[[2]][[3]] <- "3 (Aff. esteri) ; 4 (Difesa) ; III (Aff. esteri) ; IV (Difesa)"
+x[[2]][[5]] <- "3 (Aff. esteri) ; 4 (Difesa) ; III (Aff. esteri) ; IV (Difesa)"
+x[[2]][[6]] <- "3 (Aff. esteri) ; 4 (Difesa) ; III (Aff. esteri) ; IV (Difesa)"
+x[[2]][[7]] <- "3 (Aff. esteri) ; 4 (Difesa) ; III (Aff. esteri) ; IV (Difesa)"
 
-x[[3]] <- rep("3 (Aff. esteri, emigrazione)", 10)
-x[[3]][[5]] <- "Uffici di Presidenza integrati Commissioni riunite 3 e 14"
+x[[3]] <- rep("3 (Aff. esteri)", 10)
+x[[3]][[5]] <- "3 (Aff. esteri) ; 14 (Politiche dell'UE)"
 
-x[[4]] <- rep("3 (Aff. esteri, emigrazione)", 10)
+x[[4]] <- rep("3 (Aff. esteri)", 10)
 
-x[[5]] <- rep("3 (Aff. esteri, emigrazione)", 10)
+x[[5]] <- rep("3 (Aff. esteri)", 10)
 
-x[[6]] <- rep("3 (Aff. esteri, emigrazione)", 10)
+x[[6]] <- rep("3 (Aff. esteri)", 10)
 
-x[[7]] <- rep("3 (Aff. esteri, emigrazione)", 9)
+x[[7]] <- rep("3 (Aff. esteri)", 9)
 
-x[[8]] <- rep("3 (Aff. esteri, emigrazione)", 4)
+x[[8]] <- rep("3 (Aff. esteri)", 4)
 
 commissione <- x
 
@@ -106,26 +113,26 @@ for (i in 1:8) {
     str_trim(side = "both") # togli white space all'inizio e alla fine!
 }
 
-a <- "Conferenza delle Regioni e delle Province autonome,"
+a <- "Conferenza delle Regioni e delle Province autonome ;"
 x[[1]] <- append(x[[1]], a, after = 3)
 a <- paste(x[[1]][[4]],x[[1]][[5]],x[[1]][[6]], sep = " ")
 x[[1]] <- x[[1]][-c(4,5,6)]
 x[[1]] <- append(x[[1]], a, after = 3)
 
-a <- "Conferenza dei Presidenti delle Assemblee legislative delle Regioni e delle Province autonome, Comitato europeo delle Regioni, UPI," 
+a <- "Conferenza dei Presidenti delle Assemblee legislative delle Regioni e delle Province autonome ; Comitato europeo delle Regioni ; UPI ;" 
 x[[1]] <- append(x[[1]], a, after = 8)
 a <- paste(x[[1]][[9]],x[[1]][[10]],x[[1]][[11]], sep = " ")
 x[[1]] <- x[[1]][-c(9,10,11)]
 x[[1]] <- append(x[[1]], a, after = 8)
 
-x[[1]][[10]] <- "giornalista Alberto Negri e Ambasciatore Luciano Pezzotti"
+x[[1]][[10]] <- "Alberto Negri, giornalista ; Luciano Pezzotti, ambasciatore"
 
-x[[2]][[4]] <- "Lucio Caracciolo (Direttore della rivista Limes), Rossella Miccio (Presidente di Emergency), Fausto Biloslavo (giornalista), Stefano Di Carlo (direttore Medici Senza Frontiere Italia) e Francesco Segoni (responsabile delle comunicazioni Medici Senza Frontiere Francia)"
+x[[2]][[4]] <- "Lucio Caracciolo, direttore della rivista Limes ; Rossella Miccio, presidente di Emergency ; Fausto Biloslavo, giornalista ; Stefano Di Carlo, direttore Medici Senza Frontiere Italia ; Francesco Segoni, responsabile delle comunicazioni Medici Senza Frontiere Francia"
 
-x[[7]][[8]] <- "Direttore delle relazioni internazionali dell'ENI, Lapo Pistelli"
-x[[7]][[9]] <- "Presidente dell'Istituto per gli Studi di Politica Internazionale (ISPI), ambasciatore Giampiero Massolo"
+x[[7]][[8]] <- "Lapo Pistelli, direttore delle relazioni internazionali dell'ENI"
+x[[7]][[9]] <- "Giampiero Massolo, ambasciatore e presidente dell'Istituto per gli Studi di Politica Internazionale (ISPI)"
 
-x[[8]][[2]] <- "Direttore di Porte Aperte Onlus, Cristian Nani"
+x[[8]][[2]] <- "Cristian Nani, direttore di Porte Aperte Onlus"
 
 nomi <- x
 rm(x)
@@ -137,3 +144,5 @@ d <- unlist(data)
 
 # Dataframe Commissione 3
 c3 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
+
+write.csv(c3, "C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione3.csv", row.names = FALSE)
