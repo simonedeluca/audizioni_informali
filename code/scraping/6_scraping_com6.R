@@ -17,28 +17,27 @@ for (page_index in 1:21) {
 
 x <- atto
 
-x[[9]] <- append(x[[9]], "NA", after = 8)
-x[[12]] <- append(x[[12]], "NA", after = 7)
+x[[9]] <- append(x[[9]], "A.S. 2144 - Conversione in legge del decreto-legge 22 marzo 2021, n. 41, recante misure urgenti in materia di sostegno alle imprese e agli operatori economici, di lavoro, salute e servizi territoriali, connesse all'emergenza da COVID-19", after = 8)
+x[[12]] <- append(x[[12]], "A.S. 788 ; A.S. 79 ; A.S. 1287", after = 7)
 
-a <- c("NA", "NA")
+a <- rep("Indagine conoscitiva sul processo di semplificazione del sistema tributario e del rapporto tra contribuenti e fisco", 2)
 x[[17]] <- append(x[[17]], a, after = 5)
-x[[17]] <- append(x[[17]], "NA", after = 9)
+x[[17]] <- append(x[[17]], "Indagine conoscitiva sul processo di semplificazione del sistema tributario e del rapporto tra contribuenti e fisco", after = 9)
 
-a <- c("NA", "NA")
 x[[18]] <- append(x[[18]], a, after = 0)
-x[[18]] <- append(x[[18]], "NA", after = 3)
+x[[18]] <- append(x[[18]], "Indagine conoscitiva sul processo di semplificazione del sistema tributario e del rapporto tra contribuenti e fisco", after = 3)
 
-a <- rep("NA", 5)
+a <- rep("Indagine conoscitiva sul processo di semplificazione del sistema tributario e del rapporto tra contribuenti e fisco", 5)
 x[[19]] <- append(x[[19]], a, after = 4)
 
-x[[20]] <- append(x[[20]], "NA", after = 2)
-x[[20]] <- append(x[[20]], "NA", after = 6)
-x[[20]] <- append(x[[20]], "sull'attività svolta", after = 7)
-a <- rep("NA", 2)
+x[[20]] <- append(x[[20]], "Indagine conoscitiva sul processo di semplificazione del sistema tributario e del rapporto tra contribuenti e fisco", after = 2)
+x[[20]] <- append(x[[20]], "Indagine conoscitiva sul processo di semplificazione del sistema tributario e del rapporto tra contribuenti e fisco", after = 6)
+x[[20]] <- append(x[[20]], "Attività svolta", after = 7)
+a <- rep("Indagine conoscitiva sul processo di semplificazione del sistema tributario e del rapporto tra contribuenti e fisco", 2)
 x[[20]] <- append(x[[20]], a, after = 8)
 
-x[[21]] <- append(x[[21]], "NA", after = 0)
-x[[21]] <- append(x[[21]], "NA", after = 3)
+x[[21]] <- append(x[[21]], "Indagine conoscitiva sul processo di semplificazione del sistema tributario e del rapporto tra contribuenti e fisco", after = 0)
+x[[21]] <- append(x[[21]], "Indagine conoscitiva sul processo di semplificazione del sistema tributario e del rapporto tra contribuenti e fisco", after = 3)
 
 atto <- x
 
@@ -59,7 +58,7 @@ x <- data
 
 x[[16]] <- x[[16]][-1]
 
-a <- c("28 ottobre 2020", "08 maggio 2019", "26 settembre 2019", "26 settembre 2019", "26 settembre 2019")
+a <- c("28 Ottobre 2020", "08 Maggio 2019", "26 Settembre 2019", "26 Settembre 2019", "26 Settembre 2019")
 x[[21]] <- append(x[[21]], a, after = 2)
 
 data <- x
@@ -148,7 +147,7 @@ a <- paste(x[[1]][[4]],x[[1]][[5]], sep = " ")
 x[[1]] <- x[[1]][-c(4,5)]
 x[[1]] <- append(x[[1]], a, after = 3)
 
-x[[7]][[1]] <- "COBTI"
+x[[7]][[1]] <- "COBTI ; LAPET"
 
 a <- paste(x[[9]][[7]],x[[9]][[8]], sep = " ")
 x[[9]] <- x[[9]][-c(7,8)]
@@ -175,20 +174,20 @@ a <- paste(x[[12]][[1]],x[[12]][[2]], sep = " ")
 x[[12]] <- x[[12]][-c(1,2)]
 x[[12]] <- append(x[[12]], a, after = 0)
 
-x[[17]][9] <- "Presidente Fondazione Bellisario"
+x[[17]][9] <- "Lella Golfo, presidente Fondazione Bellisario"
 
-x[[18]][1] <- "Direttore Agenzia delle Entrate"
+x[[18]][1] <- "Ernesto Maria Ruffini, direttore Agenzia delle Entrate"
 x[[18]][3] <- "Assogestioni"
 x[[18]][6] <- "CONSOB"
 
 x[[19]][1] <- "Stefano De Polis, IVASS"
-x[[19]][3] <- "IVASS"
+x[[19]][3] <- "Stefano De Polis, IVASS"
 x[[19]][4] <- "Assogestioni"
 x[[19]][5] <- "R.ETE. Imprese Italia"
 x[[19]][6] <- "Alleanza delle cooperative italiane"
-x[[19]][7] <- "CIA - Agricoltori Italiani"
+x[[19]][7] <- "CIA Agricoltori Italiani"
 
-x[[21]][2] <- "avv. Ernesto Maria Ruffini, direttore dell'Agenzia delle Entrate"
+x[[21]][2] <- "Ernesto Maria Ruffini, direttore Agenzia delle Entrate"
 
 nomi <- x
 
@@ -201,4 +200,3 @@ d <- unlist(data)
 
 # Dataframe Commissione 5
 c6 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
-
