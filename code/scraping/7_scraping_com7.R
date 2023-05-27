@@ -17,16 +17,18 @@ for (page_index in 1:33) {
 
 x <- atto
 
-x[[3]] <- append(x[[3]], "NA", after = 4)
+x[[3]] <- append(x[[3]], "Impatto della pandemia sugli studenti delle scuole secondarie", after = 4)
 
-x[[4]] <- append(x[[4]], "progetti in corso nei siti archeologici italiani per il monitoraggio plurisistemico volto a contrastare l'impatto dei cambiamenti climatici", after = 0)
+x[[4]] <- append(x[[4]], "Affare assegnato n. 808 (Impatto cambiamenti climatici sui beni culturali e sul paesaggio)", after = 0)
 
-x[[9]] <- append(x[[9]], "NA", after = 4)
+x[[9]] <- append(x[[9]], "Atto n. 621 - Impatto della didattica digitale integrata (DDI) sui processi di apprendimento e sul benessere psicofisico degli studenti", after = 4)
 
-x[[17]] <- append(x[[17]], "NA", after = 4)
+x[[17]] <- append(x[[17]], "Affare assegnato n. 245 (Volontariato e professioni nei beni culturali)", after = 4)
 
-x[[20]] <- append(x[[20]], "NA", after = 6)
+x[[20]] <- append(x[[20]], "AG N. 79 (DPR reclutamento AFAM)", after = 6)
 x[[20]] <- append(x[[20]], "NA", after = 9)
+
+x[[30]] <- x[[30]][-2]
 
 atto <- x
 
@@ -66,7 +68,6 @@ for (i in 26:33) {
 }
 
 a[[26]][[1]] <- "26 settembre 2018"
-a[[30]] <- append(a[[30]], "NA", after = 1)
 
 data <- a
 rm(data_fill)
@@ -143,7 +144,7 @@ a <- rep("7 (Pubbl. istruzione)", 4)
 x[[29]] <- append(x[[29]], a, after = 3)
 x[[29]] <- append(x[[29]], "7 (Pubbl. istruzione)", after = 8)
 
-a <- rep("7 (Pubbl. istruzione)", 4)
+a <- rep("7 (Pubbl. istruzione)", 3)
 x[[30]] <- append(x[[30]], a, after = 0)
 a <- rep("7 (Pubbl. istruzione)", 5)
 x[[30]] <- append(x[[30]], a, after = 5)
@@ -229,7 +230,6 @@ a <- x[[29]][3]
 y[[29]] <- append(y[[29]], a, after = 3)
 y[[29]][7] <- x[[29]][5]
 
-y[[30]] <- append(y[[30]], "Sottosegretario di Stato alla Presidenza del Consiglio dei ministri", after = 1)
 a <- paste(x[[30]][[1]],x[[30]][[2]], sep = " ")
 y[[30]][6] <- a
 y[[30]][9] <- x[[30]][4]
@@ -262,5 +262,4 @@ d <- unlist(data)
 
 # Dataframe Commissione 7
 c7 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
-
 
