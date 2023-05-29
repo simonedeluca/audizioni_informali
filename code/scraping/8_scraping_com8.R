@@ -25,11 +25,11 @@ x[[4]] <- append(x[[4]], "Aumento dei costi nel settore dell'autotrasporto", aft
 x[[7]] <- append(x[[7]], "Nuova linea ad alta velocità Salerno-Reggio Calabria e linea Potenza-Battipaglia", after = 6)
 x[[7]] <- append(x[[7]], "Predisposizione del piano industriale della società ITA", after = 9)
 x[[9]] <- append(x[[9]], "Predisposizione del piano industriale della società ITA", after = 6)
-x[[10]] <- append(x[[10]], "Impianto funiviario di Savona", after = 5)
-x[[10]] <- append(x[[10]], "Impianto funiviario di Savona", after = 8)
-x[[10]] <- append(x[[10]], "Impianto funiviario di Savona", after = 9)
+x[[10]] <- append(x[[10]], "Audizioni informali nell'ambito dell'esame del disegno di legge n. 1727 (interventi funivie Savona)", after = 5)
+x[[10]] <- append(x[[10]], "Audizioni informali nell'ambito dell'esame del disegno di legge n. 1727 (interventi funivie Savona)", after = 8)
+x[[10]] <- append(x[[10]], "Audizioni informali nell'ambito dell'esame del disegno di legge n. 1727 (interventi funivie Savona)", after = 9)
 x[[12]] <- append(x[[12]], "Nuove tecnologie e rete per contrastare l'emergenza epidemiologica da coronavirus", after = 9)
-x[[13]] <- append(x[[13]], "Incidente ferroviario di Lodi il 6 febbraio 2020", after = 1)
+x[[13]] <- append(x[[13]], "Audizioni informali sull'incidente ferroviario avvenuto a Lodi il 6 febbraio 2020", after = 1)
 x[[13]] <- append(x[[13]], "Stato di avanzamento delle opere e delle attività relativa alla realizzazione del MO.S.E.", after = 7)
 x[[14]] <- append(x[[14]], "Proposta di nomina del Presidente dell'Autorità di sistema portuale dello Stretto", after = 5)
 x[[17]] <- append(x[[17]], "Proposta di nomina del Presidente dell'Ente Nazionale per l'Aviazione Civile (E.N.A.C.)", after = 6)
@@ -41,7 +41,7 @@ x[[19]] <- append(x[[19]], "Situazione economica e finanziaria dell'azienda ALIT
 x[[19]] <- append(x[[19]], "affare assegnato sulle attività della Guardia Costiera, con particolare riferimento al soccorso in mare (n. 88)", after = 7)
 x[[20]] <- append(x[[20]], "Attività ANAC in materia di contratti pubblici", after = 2)
 x[[20]] <- append(x[[20]], "Attività ANAC in materia di contratti pubblici", after = 3)
-x[[20]] <- append(x[[20]], "Crollo del Ponte Morandi di Genova del 14 agosto 2018", after = 4)
+x[[20]] <- append(x[[20]], "Crollo del Ponte Morandi di Genova", after = 4)
 x[[20]] <- append(x[[20]], "Fermo nazionale dei servizi di autotrasporto merci conto terzi", after = 5)
 
 atto <- x
@@ -61,7 +61,7 @@ for (page_index in 1:20) {
 
 x <- data
 
-x[[18]] <- append(x[[18]], "NA", after = 0)
+x[[18]] <- append(x[[18]], "05 Dicembre 2018", after = 0)
 x[[20]] <- append(x[[20]], "25 Maggio 2022", after = 8)
 
 data <- x
@@ -143,7 +143,7 @@ x[[18]] <- a
 
 a <- rep("8 (Lavori pubblici)", 10)
 x[[19]] <- a
-x[[19]][5] <- "Uffici di Presidenza riuniti delle Commissioni 8 e 10"
+x[[19]][5] <- "8 (Lavori pubblici) ; 10 (Industria)"
 
 a <- rep("8 (Lavori pubblici)", 4)
 x[[20]] <- append(x[[20]], a, after = 0)
@@ -196,7 +196,7 @@ for (i in 1:20) {
 
 # Integrazione nomi 1 e nomi 2
 
-y[[8]][4] <- "Ministro per l'innovazione tecnologica e la transizione digitale, Vittorio Colao"
+y[[8]][4] <- "Vittorio Colao, ministro per l'innovazione tecnologica e la transizione digitale"
 y[[8]][7] <- "UGL, organizzazione sindacale"
 y[[11]][3] <- x[[11]][2]
 a <- paste(x[[11]][[3]],x[[11]][[4]], sep = " ")
@@ -223,3 +223,6 @@ d <- unlist(data)
 
 # Dataframe Commissione 7
 c8 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
+write.csv(new_data, "C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione8.csv", row.names = FALSE)
+
+
