@@ -1,10 +1,6 @@
 library("dplyr")
 library("stringr")
 
-c9 <- read.csv("C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione9.csv", header = TRUE, stringsAsFactors = FALSE)
-c9$NOMI[16] <- "Fruitimprese"
-write.csv(c9, "C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione9.csv", row.names = FALSE)
-
 c10 <- read.csv("C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione10.csv", header = TRUE, stringsAsFactors = FALSE)
 
 nomi <- c10$NOMI
@@ -142,6 +138,13 @@ for (i in j) {
 for (i in j) {
   single_name[output] <- x[j]
 }
+
+p <- str_extract(single_name, "/")
+p <- which(p == "/")
+x <- str_subset(single_name, "/")
+
+single_name[745] <- "FIBA-Confesercenti (Federazione italiana imprese balneari)"
+single_name[845] <- "Federazione Moda Italia-Confcommercio"
 
 single_name <- str_squish(single_name)
 

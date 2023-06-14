@@ -133,6 +133,8 @@ for (i in 1:26) {
 y[[1]][[7]] <- "AIA ; MIPAAF ; LAV ; FNOVI"
 y[[1]][[8]] <- "Legambiente-Lipu-WWF ; Coldiretti ; Uecoop"
 
+y[[2]][[6]] <- "Fruitimprese"
+
 y[[3]][[3]] <- "Consorzio Prosciutto di Parma ; Associazione Italiana Allevatori ; LAV ; ANMVI ; Federparchi ; ASSICA-UNAITALIA ; Prof. Ferroglio"
 y[[3]][[4]] <- "UNCIAGROALIMENTARE ; COLDIRETTI"
 y[[3]][[5]] <- "Arma dei Carabinieri Comando unità forestali, ambientali e agroalimentari ; Regione Lombardia Assessorato all'agricoltura, alimentazione e sistemi verdi"
