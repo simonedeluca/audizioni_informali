@@ -17,7 +17,7 @@ for (page_index in 1:19) {
 
 x <- atto
 
-x[[1]] <- append(x[[1]], "AG N. 383", after = 5)
+x[[1]] <- append(x[[1]], "Audizioni AG n. 383 (fauna selvatica ed esotica)", after = 5)
 x[[6]] <- append(x[[6]], "Affare assegnato sul potenziamento e riqualificazione della medicina territoriale nell'epoca post Covid (n. 569)", after = 8)
 
 atto <- x
@@ -171,8 +171,7 @@ a <- paste(x[[17]][[2]],x[[17]][[3]], sep = " ")
 x[[17]] <- x[[17]][-c(2,3)]
 x[[17]] <- append(x[[17]], a, after = 1)
 
-
-words_to_remove <- "Documentazione|Memoria - |Audizione|AUDIZIONE|Contributo fornito|DOCUMENTO|Slides|informale|fornita|inviata|depositata|pervenuta|trasmessa|consegnata|da rappresentanti|da parte|di rappresentanti|rappresentanti|Osservazioni trasmesse|Ulteriore documentazione|Documento|depositato|trasmesso|Relazione|Documenti depositati|Osservazioni trasmesse"
+words_to_remove <- "Documentazione|Memoria - |Audizione|AUDIZIONE|Contributo fornito|DOCUMENTO|Slides|informale|fornita|inviata|depositata|pervenuta|trasmessa|consegnata|da rappresentanti|da parte|di rappresentanti|rappresentanti|Osservazioni trasmesse|Ulteriore documentazione|Documento|depositato|trasmesso|- Relazione|Memoria|Momoria|Documenti depositati|Osservazioni trasmesse|- risposte ai quesiti dei senatori|rappresentante|Documenti"
 for (i in 1:19) {
   x[[i]] <- gsub(words_to_remove, "", x[[i]]) %>%
     str_trim(side = "left")
@@ -180,9 +179,9 @@ for (i in 1:19) {
 
 # Strategia per pulire la colonna degli auditi
 x <- lapply(x, str_squish)
-x <- lapply(x, function(x) gsub("\\s*\\([^\\)]+\\)"," -", x))
-x <- lapply(x, function(x) gsub("\\-$", "", x))
-x <- lapply(x, function(x) str_split(x, "-", simplify = TRUE))
+x <- lapply(x, function(x) gsub("\\([^()]*\\d+[^()]*\\)"," ;", x))
+x <- lapply(x, function(x) gsub("\\;$", "", x))
+x <- lapply(x, function(x) str_split(x, ";", simplify = TRUE))
 x <- lapply(x, t)
 
 my_fun <- function(x) {
@@ -216,18 +215,22 @@ for (i in 1:19) {
 }
 
 for (i in 1:19) {
-  x[[i]] <- lapply(x[[i]], function(x) paste(x, collapse = " - "))
+  x[[i]] <- lapply(x[[i]], function(x) paste(x, collapse = " ; "))
 }
 
 nomi <- x
+nomi[[6]][[4]] <- "Fondazione Promozione Sociale Onlus ; Unione italiana dei ciechi e degli ipovedenti ; Dipartimento di Scienze biomediche del CNR ; SIOT ; AIFeC ; FNOPI ; Federchimica Assobiotec ; Gruppo Vita (Valore ed Innovazione delle Terapie Avanzate) ; CODIRP ; Campagna 2018 PHC Now or Never ; ALNYLAM ; FNOMCEO ; Omar Osservatorio malattie rare ; FOFI ; prof.ssa Abbracchio, Università degli Studi di Milano ; Federchimica Assogastecnici ; COSMED ; FNOVI ; dott. Boldrini, SIMFER ; Istituto Superiore di Sanita' ; SIFO"
+nomi[[11]][[4]] <- "prof. Giuseppe REMUZZI, direttore dell'Istituto di ricerche farmacologhiche Mario Negri ; dott. ssa Ilaria CIANCALEONI BARTOLI, direttore dell'Osservatorio malattie rare (OMAR) ; dott.ssa Vincenza COLONNA, ricercatrice del CNR, genetista e bioinformatica ; prof. Franco LOCATELLI, professore ordinario di pediatria generale e specialistica dell'Università La Sapienza di Roma, presidente del Consiglio Superiore di Sanità ; prof. Massimo CICCOZZI, epidemiologo molecolare nell'ambito delle mutazioni del virus ; prof. Angelo DEL FAVERO, docente alla LUISS Business School e Università telematica La Sapienza, già direttore generale dell'Istituto Superiore di Sanità"
+nomi[[12]][[4]] <- "Daniela CACCAMO, Associata di Biochimica Clinica e Biologia Molecolare Clinica presso l'Università di Messina"
+nomi[[14]][[7]] <- "Assessore D'Amato, Regione Lazio"
 
 a <- unlist(commissione)
 b <- unlist(nomi)
 c <- unlist(atto)
 d <- unlist(data)
 
-# Dataframe Commissione 7
+# Dataframe Commissione 12
 c12 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
 
-write.csv(c12, "C:/Users/pc/Desktop/Progetto Audizioni/raw_data/commissione12.csv", row.names = FALSE)
+write.csv(c12, "C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione12.csv", row.names = FALSE)
 
