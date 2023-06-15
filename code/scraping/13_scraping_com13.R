@@ -20,7 +20,7 @@ x <- atto
 x[[1]] <- append(x[[1]], "Audizioni AG n. 383 (fauna selvatica ed esotica)", after = 2)
 x[[14]] <- append(x[[14]], "Doc. XXVII, n. 18 (Piano nazionale di ripresa e resilienza)", after = 2)
 x[[16]] <- append(x[[16]], "ddl 1131 (Rigenerazione urbana)", after = 0)
-x[[17]] <- append(x[[17]], "AS 1302, 1981, 1943, 970, 1131", after = 1)
+x[[17]] <- append(x[[17]], "AS 1302 ; 1981 ; 1943 ; 970 ; 1131", after = 1)
 x[[24]] <- append(x[[24]], "ddl	497", after = 8)
 x[[25]] <- append(x[[25]], "AS 149, 497, 757 e 776 (isole minori)", after = 3)
 x[[25]] <- append(x[[25]], "Ilva", after = 4)
@@ -40,7 +40,7 @@ for (page_index in 1:25) {
   Sys.sleep(5)
 }
 
-a <- c("settembre 2021", "aprile 2022")
+a <- c("22 Settembre 2021", "30 Giugno 2022")
 data[[25]] <- append(data[[25]], a, after = 5)
 
 # 3. Estrazione commissioni coinvolte
@@ -158,9 +158,9 @@ x[[21]] <- append(x[[21]], a, after = 9)
 x[[21]][3] <- "Confindustria ; Istituto Nazionale Urbanistica ; Coldiretti ; Confagricoltura ; Copagri"
 x[[21]][4] <- "Corte dei conti ; ANCE ; Rete delle Professioni Tecniche ; ANCI ; UPI ; Conferenza delle regioni e delle province autonome ; INAIL"
 x[[21]][5] <- "Confindustria ; CNA Nazionale ; Confcommercio ; Finco ; Alleanza delle cooperative italiane ; Assoimmobiliare ; Confedilizia ; Confartigianato; FILLEA-CGIL - FILCA-CISL - FENEAL-UIL ; CGIL-CISL-UIL"
-x[[21]][6] <- "FILLEA-CGIL ; prof. Paolo Maddalena, Vice Presidente emerito della Corte Costituzionale ; Forum nazionale 'salviamo il paesaggio-difendiamo i territori'"
+x[[21]][6] <- "FILLEA-CGIL ; prof. Paolo Maddalena, Vice Presidente emerito della Corte Costituzionale ; Forum nazionale 'salviamo il paesaggio difendiamo i territori'"
 x[[21]][9] <- "Prof.ssa Adriana Galderisi, Professore associato di Tecnica e Pianificazione Urbanistica dell'Università degli Studi della Campania Vanvitelli ; Prof. Carmelo Dazzi, Professore di Scienze Agrarie dell'Università degli Studi di Palermo"
-x[[21]][10] <- "Prof. Paolo Pileri, Professore ordinario di pianificazione e progettazione urbanistica del Politecnico di Milano ;  Prof. Giuseppe Corti, Professore ordinario di Pedologia-Dipartimento di Scienze agrarie, alimentari e ambientali dell'Università Politecnica delle Marche ; Prof. Carlo Berizzi, Associated Professor in Architectural and Urban Design-Coordinator for International Mobility-Faculty of Engineering dell'Università degli Studi di Pavia ; Prof.ssa Simona Tondelli, Professore associato di tecnica e pianificazione urbanistica-Dipartimento di Architettura dell'Università degli Studi di Bologna"
+x[[21]][10] <- "Prof. Paolo Pileri, Professore ordinario di pianificazione e progettazione urbanistica del Politecnico di Milano ;  Prof. Giuseppe Corti, Professore ordinario di Pedologia Dipartimento di Scienze agrarie, alimentari e ambientali dell'Università Politecnica delle Marche ; Prof. Carlo Berizzi, Associated Professor in Architectural and Urban Design Coordinator for International Mobility Faculty of Engineering dell'Università degli Studi di Pavia ; Prof.ssa Simona Tondelli, Professore associato di tecnica e pianificazione urbanistica Dipartimento di Architettura dell'Università degli Studi di Bologna"
 
 a <- paste(x[[22]][[4]],x[[22]][[5]], sep = " ")
 x[[22]] <- x[[22]][-c(4,5)]
@@ -197,7 +197,7 @@ for (i in 1:25) {
 
 # Strategia per pulire la colonna degli auditi
 x <- lapply(x, str_squish)
-x <- lapply(x, function(x) gsub("\\s*\\([^\\)]+\\)"," ;", x))
+x <- lapply(x, function(x) gsub("\\([^()]*\\d+[^()]*\\)"," ;", x))
 x <- lapply(x, function(x) gsub("\\;$", "", x))
 x <- lapply(x, function(x) str_split(x, ";", simplify = TRUE))
 x <- lapply(x, t)
@@ -214,7 +214,7 @@ my_fun <- function(x) {
   x[!x %in% ""]
 }
 
-z <- c(1,6,9:12,16,20:22)
+z <- c(1,6,9:12,20:22)
 
 for (i in z) {
   x[[i]] <- apply(x[[i]], 2, my_fun)
@@ -234,7 +234,7 @@ for (i in z) {
   x[[i]] <- lapply(x[[i]], function(x) paste(x, collapse = " ; "))
 }
 
-z <- c(2:5, 7,8, 13:15, 17:19, 23:25)
+z <- c(2:5, 7,8, 13:19, 23:25)
 
 for (i in z) {
   x[[i]] <- lapply(x[[i]], function(x) gsub(words2, "", x))
@@ -254,8 +254,4 @@ d <- unlist(data)
 # Dataframe Commissione 13
 c13 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
 
-write.csv(c13, "C:/Users/pc/Desktop/Progetto Audizioni/raw_data/commissione13.csv", row.names = FALSE)
-
-
-
-
+write.csv(c13, "C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione13.csv", row.names = FALSE)
