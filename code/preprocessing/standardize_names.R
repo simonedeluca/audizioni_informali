@@ -21,8 +21,8 @@ nomi_camera <- df$nomi_camera
 nomi_camera <- str_to_upper(nomi_camera)
 nomi_camera <- unique(sort(nomi_camera))
 
-setwd("C:/Users/pc/Desktop/Progetto Audizioni")
-senato <- import("data.xlsx")
+setwd("C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data")
+senato <- import("dataset_senato.xlsx")
 
 nomi_senato <- senato$NOMI
 nomi_senato <- nomi_senato[!is.na(nomi_senato)]
