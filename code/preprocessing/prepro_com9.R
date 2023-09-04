@@ -103,6 +103,8 @@ for (i in j) {
 }
 
 single_name[311] <- gsub("\\)$", "", single_name[311])
+single_name[334] <- gsub("\\:", "", single_name[334])
+single_name[457] <- gsub("\\:", "", single_name[457])
 single_name <- str_squish(single_name)
 new_data[,2] <- single_name
 
@@ -136,6 +138,9 @@ new_data$COMMISSIONE <- gsub(",", " ;", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub("con", " ;", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub("Senato", "", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub("Camera", "", new_data$COMMISSIONE) %>% str_squish()
+
+new_data <- new_data[-c(72,245),]
+rownames(new_data) <- 1:nrow(new_data)
 
 write.csv(new_data, "C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data/C9.csv", row.names = FALSE)
 
