@@ -34,3 +34,7 @@ intersect(nomi_camera,nomi_senato) #346 nomenclature uguali
 
 # TASK: standardize the nomenclature of the collected names.
 
+library("xlsx")
+write.xlsx (nomi_camera, "C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data/Camera.xlsx", sheetName="Camera", col.names=TRUE, row.names=FALSE, append=FALSE, showNA=TRUE, password=NULL)
+write.xlsx (nomi_senato, "C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data/Senato.xlsx", sheetName="Senato", col.names=TRUE, row.names=FALSE, append=FALSE, showNA=TRUE, password=NULL)
+
