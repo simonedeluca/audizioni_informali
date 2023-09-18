@@ -1,4 +1,5 @@
 library("dplyr")
+library("xlsx")
 
 x <- c(1:3,5:14)
 
@@ -9,6 +10,8 @@ for (i in x) {
   }
 
 df <- bind_rows(data)
+
+write.xlsx (df, "C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data/dataset_senato.xlsx", sheetName="Dati", col.names=TRUE, row.names=FALSE, append=FALSE, showNA=TRUE, password=NULL)
 
 # OR
 
@@ -23,8 +26,4 @@ setwd("C:/Users/pc/Desktop")
 library("rio")
 export(df, "data.xlsx")
 
-
-library("xlsx")
-write.xlsx (df, "data.xlsx", sheetName="Dati", col.names=TRUE, row.names=FALSE, append=FALSE, showNA=TRUE, password=NULL)
-
-
+###
