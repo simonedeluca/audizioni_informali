@@ -122,10 +122,11 @@ x$month <- with(x, ifelse(V2 %in% "Gennaio", 1,
                                                              ifelse(V2 %in% "Luglio", 7,
                                                                     ifelse(V2 %in% "Agosto", 8,
                                                                            ifelse(V2 %in% "Settembre", 9,
-                                                                                  ifelse(V2 %in% "Ottobre", 10,
-                                                                                         ifelse(V2 %in% "Novembre", 11,
-                                                                                                ifelse(V2 %in% "Dicembre", 12,
-                                                                                                       "NA")))))))))))))
+                                                                                  ifelse(V2 %in% "settembre", 9,
+                                                                                         ifelse(V2 %in% "Ottobre", 10,
+                                                                                                ifelse(V2 %in% "Novembre", 11,
+                                                                                                       ifelse(V2 %in% "Dicembre", 12,
+                                                                                                              "NA"))))))))))))))
 
 
 date <- paste(x$V1,x$month,x$V3, sep= "-")
