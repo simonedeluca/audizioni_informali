@@ -2,6 +2,17 @@ library(readxl)
 library(dplyr)
 library(stringr)
 
+setwd("C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data")
+
+senato <- read_excel("dataset_senato.xlsx")
+
+sum(is.na(senato$NOMI))
+which(is.na(senato$NOMI))
+senato <- senato[!is.na(senato$NOMI),]
+
+senato$nomi_senato <- str_to_upper(senato$NOMI)
+
+
 setwd("C:/Users/pc/Desktop/notes/Progetto Audizioni")
 camera <- read_excel("Mappatura audizioni informali Camera (definitiva e con PNRR).xlsx", sheet = "Audizioni 2018_2020")
 
@@ -11,6 +22,11 @@ camera <- camera[,-c(8:12)]
 camera$nomi_camera <- ifelse(is.na(camera$`Ente/Organizzazione`), camera$`Nome e cognome`,
                              camera$`Ente/Organizzazione`)
 sum(is.na(camera$nomi_camera))
+camera$nomi_camera <- str_to_upper(camera$nomi_camera)
+
+intersect(camera$nomi_camera,senato$nomi_senato) #346 nomenclature uguali
+
+# TASK: standardize the nomenclature of the collected names.
 
 camera %>% count(`Tipologia soggetto`)
 
@@ -25,7 +41,6 @@ aziende <- camera %>%
   select(nomi_camera)
 
 table(aziende)
-aziende$nomi_camera <- str_to_upper(aziende$nomi_camera)
 
 aziende$nomi_camera <- ifelse(aziende$nomi_camera=="ARCELORMITTAL ITALIA", "ARCELORMITTAL",
                               ifelse(aziende$nomi_camera=="ARCELOR MITTAL", "ARCELORMITTAL",
@@ -39,64 +54,16 @@ to_remove <- "SRL|SPA|S.R.L.|S.P.A.|ITALY|ITALIA"
 aziende$nomi_camera2 <- gsub(to_remove, "", aziende$nomi_camera)
 
 
+a <- "WIND TRE"
+b <- "WINDTRE"
+stringdist(a,b, method = "lv")
 
+telos <- stringdist(senato$nomi_senato, aziende$nomi_camera2[8], method = "lv")
+table(telos)
+which(telos<6)
+senato$nomi_senato[607] #TELOS
+senato$nomi_senato[4228] #TELT S.A.S.
 
+# Dovrei provare un metodo diverso? Questo non sembra funzionare con which.min in quanto non c'è garanzia che si tratti dello stesso soggetto.
 
-
-
-
-camera$nomi_camera <- gsub("\\.", "", camera$nomi_camera)
-
-camera <- str_split_fixed(camera$nomi_camera, ",", 2)
-camera$nomi_camera <- str_to_upper(camera$nomi_camera)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-setwd("C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data")
-senato <- import("dataset_senato.xlsx")
-
-nomi_senato <- senato$NOMI
-nomi_senato <- nomi_senato[!is.na(nomi_senato)]
-
-nomi_senato <- str_to_upper(nomi_senato)
-nomi_senato <- unique(sort(nomi_senato))
-
-intersect(nomi_camera,nomi_senato) #346 nomenclature uguali
-
-# TASK: standardize the nomenclature of the collected names.
-
-library("xlsx")
-write.xlsx (nomi_camera, "C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data/Camera.xlsx", sheetName="Camera", col.names=TRUE, row.names=FALSE, append=FALSE, showNA=TRUE, password=NULL)
-write.xlsx (nomi_senato, "C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data/Senato.xlsx", sheetName="Senato", col.names=TRUE, row.names=FALSE, append=FALSE, showNA=TRUE, password=NULL)
 
