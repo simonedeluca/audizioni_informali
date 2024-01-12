@@ -1,7 +1,7 @@
 library("dplyr")
 library("stringr")
 
-c9 <- read.csv("C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione9.csv", header = TRUE, stringsAsFactors = FALSE)
+c9 <- read.csv("C:/Users/SImone/Desktop/audizioni_informali/data/raw_data/commissione9.csv", header = TRUE, stringsAsFactors = FALSE)
 
 nomi <- c9$NOMI
 nomi <- str_squish(nomi)
@@ -131,7 +131,7 @@ x$month <- with(x, ifelse(V2 %in% "Gennaio", 1,
 
 date <- paste(x$V1,x$month,x$V3, sep= "-")
 new_data <- subset(new_data, select = -c(DATA,times))
-new_data$DATA <- as.Date(date, format="%d-%m-%y")
+new_data$DATA <- as.Date(date, format="%d-%m-%Y")
 
 new_data$COMMISSIONE <- gsub("ª", "", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub(" e ", " ; ", new_data$COMMISSIONE)
@@ -143,5 +143,5 @@ new_data$COMMISSIONE <- gsub("Camera", "", new_data$COMMISSIONE) %>% str_squish(
 new_data <- new_data[-c(72,245),]
 rownames(new_data) <- 1:nrow(new_data)
 
-write.csv(new_data, "C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data/C9.csv", row.names = FALSE)
+write.csv(new_data, "C:/Users/SImone/Desktop/audizioni_informali/data/preprocessed_data/C9.csv", row.names = FALSE)
 

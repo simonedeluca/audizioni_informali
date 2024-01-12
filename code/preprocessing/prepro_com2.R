@@ -1,7 +1,7 @@
 library("dplyr")
 library("stringr")
 
-c2 <- read.csv("C:/Users/pc/Desktop/Progetto Audizioni/data/raw_data/commissione2.csv", header = TRUE, stringsAsFactors = FALSE)
+c2 <- read.csv("C:/Users/SImone/Desktop/audizioni_informali/data/raw_data/commissione2.csv", header = TRUE, stringsAsFactors = FALSE)
 
 nomi <- c2$NOMI
 nomi <- str_squish(nomi)
@@ -158,6 +158,6 @@ x$month <- with(x, ifelse(V2 %in% "Gennaio", 1,
 
 date <- paste(x$V1,x$month,x$V3, sep= "-")
 new_data <- subset(new_data, select = -DATA)
-new_data$DATA <- as.Date(date, format="%d-%m-%y")
+new_data$DATA <- as.Date(date, format="%d-%m-%Y")
 
-write.csv(new_data, "C:/Users/pc/Desktop/Progetto Audizioni/data/preprocessed_data/C2.csv", row.names = FALSE)
+write.csv(new_data, "C:/Users/SImone/Desktop/audizioni_informali/data/preprocessed_data/C2.csv", row.names = FALSE)
