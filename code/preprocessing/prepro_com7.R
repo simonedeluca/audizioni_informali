@@ -239,8 +239,8 @@ for (i in k) {
 x[65] <- "Lorenzo Baldrighi, Artists Management ; Baldrighi Bertoni, Music Productions ; Raffaella Coletti ; InArt ; Music Center Oldani ; RESIA ; Stage Door"
 x[67] <- "Docenti di didattica della musica - Gruppo operativo DDM GO"
 
-single_name[1062] <- x[65]
-single_name[1066] <- x[67]
+single_name[1061] <- x[65]
+single_name[1065] <- x[67]
 
 remove <- "^'|^de"
 single_name <- gsub(remove, "", single_name) %>% str_squish()
@@ -276,5 +276,11 @@ new_data$COMMISSIONE <- gsub(",", " ;", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub("con", " ;", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub("Senato", "", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub("Camera", "", new_data$COMMISSIONE) %>% str_squish()
+
+# Expand the dataset by separating names and creating multiple rows for each
+new_data <- new_data %>%
+  separate_rows(NOMI, sep = ";") %>%
+  mutate(NOMI = str_trim(NOMI))  # Removes leading/trailing spaces
+
 
 write.csv(new_data, "C:/Users/SImone/Desktop/audizioni_informali/data/preprocessed_data/C7.csv", row.names = FALSE)
