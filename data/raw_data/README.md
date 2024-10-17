@@ -1,7 +1,6 @@
-## DESCRIZIONE DEI DATI
+## Notes
 
-Le note descrivono i file (oggetti o tabelle) salvati in cartella.
+The folder contains raw data as resulting from the stage of scraping.
 
-**table**: tabella dello script pilot 0_strategia
-
-**commissione[x]**: tabella della commissione x. La variabile 'NOMI' va ulteriormente processata.
+**table**: tabella dello script pilot "0_strategia"
+**commissione[x]**: tabella della commissione x
