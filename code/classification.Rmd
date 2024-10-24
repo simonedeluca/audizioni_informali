@@ -100,7 +100,7 @@ I dati che seguono sono contenuti nel documento del 2022 (la XVIII legislatura c
 Scopriamo i 38 settori individuati fra amministrazioni centrali e locali. 
 
 ```{r istat}
-istat <- read_excel("C:/Users/SImone/Desktop/audizioni_informali/Istat2022.xlsx")
+istat <- read_excel("C:/Users/SImone/Desktop/audizioni_informali/data/Istat2022.xlsx")
 istat$ENTI <- str_to_lower(istat$ENTI)
 unique(istat$LABEL)
 ```
