@@ -4,7 +4,6 @@ author: "Simone De Luca - Università di Milano"
 output: rmarkdown::github_document
 ---
 <style type="text/css">
-
 body{ /* Normal  */
   font-size: 18px;
   font-family: "Times New Roman";
