@@ -3,7 +3,7 @@ Classification of the stakeholders - Progetto Audizioni
 Simone De Luca - Università di Milano
 
 <style type="text/css">
-&#10;body{ /* Normal  */
+body{ /* Normal  */
   font-size: 18px;
   font-family: "Times New Roman";
   text-align: justify;
