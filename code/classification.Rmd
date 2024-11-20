@@ -338,8 +338,12 @@ senato$NOMI <- gsub("\\s+", " ", senato$NOMI) # Rimuovi spazi multipli
 # Creating a quanteda corpus
 corpus <- corpus(senato, text_field = "NOMI")
 
+# Togliamo "una" dalle stopwords perché acronimo
+stp_wrd <- stopwords('it')
+stp_wrd <- setdiff(stp_wrd, "una")
+
 # Tokenise text with preprocessing steps
-tok <- corpus %>% tokens() %>% tokens_remove(stopwords('it')) # remove stopwords (Italian)
+tok <- corpus %>% tokens() %>% tokens_remove(stp_wrd) # remove stopwords (Italian)
 ```
 
 ```{r istat pulizia}
