@@ -308,4 +308,4 @@ confind_list <- list(conf_soci = conf_soci,
                      fed_sect = fed_sect,
                      rappr_sect = rappr_sect)
 
-confind_list <- saveRDS(confind_list, "[path]/progetto_audizioni/data/clean_data/confind_list.RData")
+saveRDS(confind_list, file = "[path]/audizioni_informali/data/clean_data/confind_list.RData")

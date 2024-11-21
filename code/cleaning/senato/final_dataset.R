@@ -1,5 +1,4 @@
 library("tidyverse")
-library("xlsx")
 
 # Merge the individual dataframes for commissions
 
@@ -7,12 +6,12 @@ x <- c(1:3,5:14)
 data <- list()
 
 for (i in x) {
-  data[[i]] <- read.csv(paste0("[path]audizioni_informali/data/clean_data/senato/C",i,".csv"), header = TRUE, stringsAsFactors = FALSE)
+  data[[i]] <- read.csv(paste0("[path]/audizioni_informali/data/clean_data/senato/C",i,".csv"), header = TRUE, stringsAsFactors = FALSE)
   }
 
 # OR
 
-path <- paste0("[path]audizioni_informali/data/clean_data/senato/C",1:14,".csv")
+path <- paste0("[path]/audizioni_informali/data/clean_data/senato/C",1:14,".csv")
 path <- path[-4]
 
 data <- lapply(path, read.csv)
