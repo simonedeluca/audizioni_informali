@@ -148,4 +148,7 @@ for (i in link) {
   galax_confind <- bind_rows(results)
 }
 
-
+write.csv(rappr_settore, "[path]/audizioni_informali/data/raw_data/confindustria/rappr_settore.csv", row.names = FALSE)
+write.csv(feder_settore, "[path]/audizioni_informali/data/raw_data/confindustria/feder_settore.csv", row.names = FALSE)
+write.csv(rappr_evolute, "[path]/audizioni_informali/data/raw_data/confindustria/rappr_evolute.csv", row.names = FALSE)
+write.csv(galax_confind, "[path]/audizioni_informali/data/raw_data/confindustria/galax_confind.csv", row.names = FALSE)

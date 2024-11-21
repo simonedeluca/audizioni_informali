@@ -3,6 +3,11 @@
 
 # Carichiamo i dati e partiamo dalle sezioni con le sottoliste.
 
+rappr_evolute <- read.csv("[path]/audizioni_informali/data/raw_data/confindustria/rappr_evolute.csv", header = TRUE, stringsAsFactors = FALSE)
+rappr_settore <- read.csv("[path]/audizioni_informali/data/raw_data/confindustria/rappr_settore.csv", header = TRUE, stringsAsFactors = FALSE)
+feder_settore <- read.csv("[path]/audizioni_informali/data/raw_data/confindustria/feder_settore.csv", header = TRUE, stringsAsFactors = FALSE)
+galax_confind <- read.csv("[path]/audizioni_informali/data/raw_data/confindustria/galax_confind.csv", header = TRUE, stringsAsFactors = FALSE)
+
 # Sulla scorta dell'organizzazione dei dati in feder_settore, vogliamo riprodurre
 # la relazione tra capolista e membri della lista anche in rappr_settore e rappr_evolute.
 
@@ -294,7 +299,7 @@ ass_subsect <- c(ass_subsect, conf_blank) %>% unique(ass_subsect)
 # I vettori del dataset conf_sublist sono: ass_subsect, fed_sect, rappr_sect
 
 
-# Creiamo la lista per il dizionario
+# Creiamo e salviamo la lista per il dizionario
 
 confind_list <- list(conf_soci = conf_soci,
                      conf_asso = conf_asso,
@@ -303,4 +308,4 @@ confind_list <- list(conf_soci = conf_soci,
                      fed_sect = fed_sect,
                      rappr_sect = rappr_sect)
 
-
+confind_list <- saveRDS(confind_list, "[path]/progetto_audizioni/data/clean_data/confind_list.RData")
