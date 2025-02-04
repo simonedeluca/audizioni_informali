@@ -224,4 +224,4 @@ d <- unlist(data)
 # Dataframe Commissione 7
 c8 <- data.frame(COMMISSIONE=a, NOMI=b, ATTO=c, DATA=d)
 
-write.csv(c8, "[path]/audizioni_informali/data/raw_data/senato/commissione8.csv", row.names = FALSE)
+write.csv(c8, "[path]/commissione8.csv", row.names = FALSE)
