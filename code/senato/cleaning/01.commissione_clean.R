@@ -2,7 +2,7 @@ library("dplyr")
 library("stringr")
 
 # Carichiamo commissione1.csv in c1
-c1 <- read.csv("[path]/audizioni_informali/data/raw_data/senato/commissione1.csv", header = TRUE, stringsAsFactors = FALSE)
+c1 <- read.csv("[path]/commissione1.csv", header = TRUE, stringsAsFactors = FALSE)
 
 nomi <- c1$NOMI
 nomi <- str_squish(nomi)
@@ -115,4 +115,4 @@ new_data <- subset(new_data, select = -DATA)
 new_data$DATA <- as.Date(date, format="%d-%m-%Y")
 
 # salva new_data in C1.csv
-write.csv(new_data, "[path]/audizioni_informali/data/clean_data/senato/C1.csv", row.names = FALSE)
+write.csv(new_data, "[path]/C1.csv", row.names = FALSE)

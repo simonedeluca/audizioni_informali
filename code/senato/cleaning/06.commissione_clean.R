@@ -2,7 +2,7 @@ library("dplyr")
 library("stringr")
 
 # Carichiamo commissione6.csv in c6
-c6 <- read.csv("[path]/audizioni_informali/data/raw_data/senato/commissione6.csv", header = TRUE, stringsAsFactors = FALSE)
+c6 <- read.csv("[path]/commissione6.csv", header = TRUE, stringsAsFactors = FALSE)
 
 nomi <- c6$NOMI
 nomi <- str_squish(nomi)
@@ -223,4 +223,4 @@ new_data$COMMISSIONE <- gsub("Senato", "", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub("Camera", "", new_data$COMMISSIONE) %>% str_squish()
 
 # salva new_data in C6.csv
-write.csv(new_data, "[path]/audizioni_informali/data/clean_data/senato/C6.csv", row.names = FALSE)
+write.csv(new_data, "[path]/C6.csv", row.names = FALSE)

@@ -7,7 +7,7 @@
 
 # Scopriamo i 38 settori individuati fra amministrazioni centrali e locali. 
 
-istat <- read_excel("~/.../audizioni_informali/data/Istat2022.xlsx")
+istat <- read_excel("[path]/Istat2022.xlsx")
 istat$ENTI <- str_to_lower(istat$ENTI)
 unique(istat$LABEL)
 
@@ -204,4 +204,4 @@ ist_list <- list(v1=v1, v2=v2, v3=v3, v4=v4, v5=v5, v6=v6, v7=v7, v8=v8, v9=v9,
                  carica_ist=carica_ist, eu=eu)
 
 
-save(ist_list, file = "~/.../audizioni_informali/data/clean_data/istitution_list.RData")
+save(ist_list, file = "[path]/istitution_list.RData")

@@ -82,7 +82,7 @@ Ma le stesse espressioni si prestano a più declinazioni, cioè quando
 sono una delle informazioni contenute nella stringa.
 
 ``` r
-senato <- read_excel("C:/Users/SImone/Desktop/audizioni_informali/data/clean_data/dataset_senato.xlsx")
+senato <- read_excel("[path]/dataset_senato.xlsx")
 senato %>% filter(grepl("presidenza del consiglio", NOMI, ignore.case = TRUE)) %>% select(NOMI) %>% unique()
 ```
 
@@ -151,7 +151,7 @@ Scopriamo i 38 settori individuati fra amministrazioni centrali e
 locali.
 
 ``` r
-istat <- read_excel("C:/Users/SImone/Desktop/audizioni_informali/data/Istat2022.xlsx")
+istat <- read_excel("[path]/data/Istat2022.xlsx")
 istat$ENTI <- str_to_lower(istat$ENTI)
 unique(istat$LABEL)
 ```
@@ -474,8 +474,6 @@ A questo punto, creiamo il nostro corpus dai nomi del Senato, da cui
 otteniamo la lista dei tokens.
 
 ``` r
-senato <- read_excel("C:/Users/SImone/Desktop/audizioni_informali/data/clean_data/dataset_senato.xlsx")
-
 # Pulizia dataset
 
 # La punteggiatura porta significato. Possiamo decidere di eliminarla, perdendo informazione.

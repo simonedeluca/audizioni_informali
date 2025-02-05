@@ -1,22 +1,48 @@
 library("dplyr")
 library("stringr")
 
-# Carichiamo commissione13.csv in c13
-c13 <- read.csv("[path]/audizioni_informali/data/raw_data/senato/commissione13.csv", header = TRUE, stringsAsFactors = FALSE)
+# Carichiamo commissione11.csv in c11
+c11 <- read.csv("[path]/commissione11.csv", header = TRUE, stringsAsFactors = FALSE)
 
-nomi <- c13$NOMI
+nomi <- c11$NOMI
 nomi <- str_squish(nomi)
+
+nomi[57] <- "Presidente di Sport e Salute S.p.A. ; Presidente dell'INPS ; Presidente del Consiglio direttivo della divisione calcio paralimpico e sperimentale (DCPS) ; Associazione giocatori italiani basket associati (GIBA) ; Associazione nazionale atlete (ASSIST) ; Associazione italiana calciatori (AIC) ; Associazione italiana pallavolisti (AIP)"
+nomi[83] <- "Consiglio nazionale dei dottori commercialisti dei dottori commercialisti e degli esperti contabili ; Consiglio nazionale dell'Ordine consulenti del lavoro ; Associazione nazionale commercialisti"
+nomi[108] <- "Associazione nazionale vittime civili di guerra ; Associazione nazionale mutilati e invalidi civili ; Federazione tra le associazioni nazionali delle persone con disabilità"
+nomi[111] <- "Consiglio nazionale Ordine degli assistenti sociali ; Conferenza delle Regioni e delle Province autonome ; ANCI ; UPI ; INPS ; ADAPT ; ISTAT ; ADEPP ; Lottomatica ; ACADI ; ANIEF ; UDIR ; Corte dei Conti"
+nomi[114] <- "Conferenza delle Regioni e delle Province autonome ; ANCI ; CIDA ; CONFEDIR ; CODIRP ; ANSEB ; FIPE ; Corte dei Conti ; ADAPT"
+nomi[133] <- "Amnesty International ; prof. Cesare Damiano"
+
+nomi <- gsub("sul ddl.*", "", nomi)
+
+x <- c(2,13,24,39,51,61,67,68,70,74,87,93,104,105,117,124,129)
+for (i in x) {
+  nomi[i] <- gsub(" e ", " ; ", nomi[i])
+}
+
+x <- c(6,10,11,12,43,44,52,53,55,58,63,77,78,84,85,92,96,101,102,103,105,109,110,112,115,120,122,132,134,146,148,151)
+for (i in x) {
+  nomi[i] <- gsub(",", " ;", nomi[i])
+}
+for (i in x) {
+  nomi[i] <- gsub(" e ", " ; ", nomi[i])
+}
+
+words <- "rappresentanti|professori|Memorie"
+nomi <- gsub(words, "", nomi) %>% str_trim("left")
+nomi <- gsub("\\.$", "", nomi) %>% str_trim(side = "right")
 
 nomi_splitted <- str_split(nomi, ";", simplify = FALSE)
 
-m <- matrix(nrow=247, ncol=1)
-for (i in 1:247) {
+m <- matrix(nrow=151, ncol=1)
+for (i in 1:151) {
   m[i,] <- length(nomi_splitted[[i]])
 }
 
-c13$times <- m[,1]
+c11$times <- m[,1]
 
-new_data <- c13[rep(1:nrow(c13), times = c13$times), ]
+new_data <- c11[rep(1:nrow(c11), times = c11$times), ]
 rownames(new_data) <- 1:nrow(new_data)
 
 single_name <- unlist(nomi_splitted)
@@ -29,25 +55,10 @@ p <- str_extract(single_name, "-")
 p <- which(p == "-")
 x <- str_subset(single_name, "-")
 
-y <- c(2,4,5,10,21)
-for (i in y) {
-  x[i] <- gsub("-", " ", x[i])
-}
+single_name[525] <- "AIAT Associazione italiana agenzie teatrale e spettacolo"
+single_name[529] <- "AWI Art Workers Italia"
+single_name[532] <- "UNAMS Unione nazionale arte musica e spettacolo"
 
-output <- c()
-for (i in y) {
-  h <- p[i]
-  output <- c(output, h)
-}
-
-for (i in y) {
-  single_name[output] <- x[y]
-}
-
-single_name[162] <- "Prof.ssa Fraschetti, UNIVERSITA' DEGLI STUDI DI NAPOLI FEDERICO II"
-single_name[148] <- "Assitol-Elettricità Futura-Anpeb"
-
-single_name <- str_squish(single_name)
 new_data[,2] <- single_name
 
 x <- new_data$DATA
@@ -81,5 +92,5 @@ new_data$COMMISSIONE <- gsub("con", " ;", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub("Senato", "", new_data$COMMISSIONE)
 new_data$COMMISSIONE <- gsub("Camera", "", new_data$COMMISSIONE) %>% str_squish()
 
-# salva new_data in C13
-write.csv(new_data, "[path]/audizioni_informali/data/clean_data/senato/C13.csv", row.names = FALSE)
+# salva new_data in C11
+write.csv(new_data, "[path]/C11.csv", row.names = FALSE)

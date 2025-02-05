@@ -6,12 +6,12 @@ x <- c(1:3,5:14)
 data <- list()
 
 for (i in x) {
-  data[[i]] <- read.csv(paste0("[path]/audizioni_informali/data/clean_data/senato/C",i,".csv"), header = TRUE, stringsAsFactors = FALSE)
+  data[[i]] <- read.csv(paste0("[path]/C",i,".csv"), header = TRUE, stringsAsFactors = FALSE)
   }
 
 # OR
 
-path <- paste0("[path]/audizioni_informali/data/clean_data/senato/C",1:14,".csv")
+path <- paste0("[path]/C",1:14,".csv")
 path <- path[-4]
 
 data <- lapply(path, read.csv)
@@ -124,4 +124,4 @@ senato <- unique(senato)
 # Eliminiamo specifici segni di punteggiatura, non quelli facenti parte dei nomi degli enti (es: #vita, FB&Associati)
 # senato$NOMI <- gsub("[,'\"()\\-]", " ", senato$NOMI)
 
-write.csv(senato, "[path]/audizioni_informali/data/clean_data/senato/dataset_senato.csv", row.names = FALSE)
+write.csv(senato, "[path]/dataset_senato.csv", row.names = FALSE)

@@ -3,10 +3,10 @@
 
 # Carichiamo i dati e partiamo dalle sezioni con le sottoliste.
 
-rappr_evolute <- read.csv("~/.../audizioni_informali/data/raw_data/confindustria/rappr_evolute.csv", header = TRUE, stringsAsFactors = FALSE)
-rappr_settore <- read.csv("~/.../audizioni_informali/data/raw_data/confindustria/rappr_settore.csv", header = TRUE, stringsAsFactors = FALSE)
-feder_settore <- read.csv("~/.../audizioni_informali/data/raw_data/confindustria/feder_settore.csv", header = TRUE, stringsAsFactors = FALSE)
-galax_confind <- read.csv("~/.../audizioni_informali/data/raw_data/confindustria/galax_confind.csv", header = TRUE, stringsAsFactors = FALSE)
+rappr_evolute <- read.csv("[path]/rappr_evolute.csv", header = TRUE, stringsAsFactors = FALSE)
+rappr_settore <- read.csv("[path]/rappr_settore.csv", header = TRUE, stringsAsFactors = FALSE)
+feder_settore <- read.csv("[path]/feder_settore.csv", header = TRUE, stringsAsFactors = FALSE)
+galax_confind <- read.csv("[path]/galax_confind.csv", header = TRUE, stringsAsFactors = FALSE)
 
 # Sulla scorta dell'organizzazione dei dati in feder_settore, vogliamo riprodurre
 # la relazione tra capolista e membri della lista anche in rappr_settore e rappr_evolute.
@@ -308,4 +308,4 @@ confind_list <- list(conf_soci = conf_soci,
                      fed_sect = fed_sect,
                      rappr_sect = rappr_sect)
 
-saveRDS(confind_list, file = "~/.../audizioni_informali/data/clean_data/confind_list.RData")
+saveRDS(confind_list, file = "[path]/confind_list.RData")

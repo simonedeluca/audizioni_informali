@@ -2,7 +2,7 @@ library("dplyr")
 library("stringr")
 
 # Carichiamo commissione9.csv in c9
-c9 <- read.csv("[path]/audizioni_informali/data/raw_data/senato/commissione9.csv", header = TRUE, stringsAsFactors = FALSE)
+c9 <- read.csv("[path]/commissione9.csv", header = TRUE, stringsAsFactors = FALSE)
 
 nomi <- c9$NOMI
 nomi <- str_squish(nomi)
@@ -145,4 +145,4 @@ new_data <- new_data[-c(72,245),]
 rownames(new_data) <- 1:nrow(new_data)
 
 # salva new_data in C9.csv
-write.csv(new_data, "[path]/audizioni_informali/data/clean_data/senato/C9.csv", row.names = FALSE)
+write.csv(new_data, "[path]/C9.csv", row.names = FALSE)

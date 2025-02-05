@@ -5,7 +5,7 @@ library(quanteda)
 
 # SOGGETTI ISTITUZIONALI
 
-ist_list <- load("~/.../audizioni_informali/data/clean_data/istitution_list.RData")
+ist_list <- load("[path]/istitution_list.RData")
 
 # 1. Staccare gli acronimi 
 
@@ -93,7 +93,7 @@ dict <- dictionary(list(v1=ist_list[["v1"]],
 
 # CONFINDUSTRIA
 
-confind_list <- readRDS("~/.../audizioni_informali/data/clean_data/confind_list.RData")
+confind_list <- readRDS("[path]/confind_list.RData")
 
 # Eliminiamo specifici segni di punteggiatura, non quelli facenti parte dei nomi degli enti (come #vita, FB&Associati)
 confind_list <- lapply(confind_list, function(x) gsub("\\.", "", x))

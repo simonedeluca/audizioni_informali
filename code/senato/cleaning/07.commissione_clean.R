@@ -2,7 +2,7 @@ library("dplyr")
 library("stringr")
 
 # Carichiamo commissione7.csv in c7
-c7 <- read.csv("[path]/audizioni_informali/data/raw_data/senato/commissione7.csv", header = TRUE, stringsAsFactors = FALSE)
+c7 <- read.csv("[path]/commissione7.csv", header = TRUE, stringsAsFactors = FALSE)
 
 
 nomi <- c7$NOMI
@@ -285,4 +285,4 @@ new_data <- new_data %>%
   mutate(NOMI = str_trim(NOMI))  # Removes leading/trailing spaces
 
 # salva new_data in C7.csv
-write.csv(new_data, "[path]/audizioni_informali/data/clean_data/senato/C7.csv", row.names = FALSE)
+write.csv(new_data, "[path]/C7.csv", row.names = FALSE)
