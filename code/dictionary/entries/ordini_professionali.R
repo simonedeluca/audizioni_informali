@@ -22,7 +22,7 @@
 # Loading packages
 library(rvest)
 library(tidyverse)
-
+library(quanteda)
 
 link <- "https://borsaefinanza.it/ordini-professionali-tutti-quelli-attivi-in-italia/"
 
@@ -42,4 +42,19 @@ ord_prof <- c(ord_prof, "consiglio ordine nazionale tecnologi alimentari - ordin
 ord_prof <- tolower(ord_prof)
 ord_prof <- str_split(ord_prof, "-|–") %>% unlist() %>% str_trim(side="both")
 
-#saveRDS(ord_prof, file = "[path]/ord_prof.RData")
+# Eliminiamo stopwords
+stp_wrd <- stopwords('it')
+stp_wrd <- setdiff(stp_wrd, "una")
+
+for (i in stp_wrd) {
+  ord_prof <- gsub(paste0("\\b", i, "\\b"), "", ord_prof)
+}
+
+# Eliminiamo segni di punteggiatura
+ord_prof <- gsub("[,’]", "", ord_prof)
+
+# Riduciamo gli spazi bianchi a uno
+ord_prof <- gsub("\\s+", " ", ord_prof)
+
+#saveRDS(ord_prof, file = "[path]/ordini_pro.RData")
+
