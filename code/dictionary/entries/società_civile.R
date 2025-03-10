@@ -65,10 +65,9 @@ org_civil <- c(org_civil, "assoutenti", "codici", "centro diritti cittadino", "c
 org_civil <- c(org_civil, "anmic", "associazione nazionale mutilati e invalidi civili", "anmil",
                "ente nazionale sordi", "uici", "unione italiana dei ciechi e degli ipovedenti", "anglat")
 
-#saveRDS(org_rappr, file = "[path]/org_rappr.RData")
+#saveRDS(org_rappr, file = "[path]/org_società-civile.RData")
 
 # Note
 # fand - acronimo comune: federazione tra le associazioni nazionali delle persone con disabilità, associazione italiana diabetici
 # aisa - acronimo comune: associazione italiana promozione scienza aperta, associazione nazionale imprese salute animale
 
-saveRDS(org_civil, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/org_società-civile.RData")

@@ -204,4 +204,4 @@ ist_list <- list(v1=v1, v2=v2, v3=v3, v4=v4, v5=v5, v6=v6, v7=v7, v8=v8, v9=v9,
                  carica_ist=carica_ist, eu=eu)
 
 
-save(ist_list, file = "[path]/istitution_list.RData")
+saveRDS(ist_list, file = "[path]/institution_list.RData")
