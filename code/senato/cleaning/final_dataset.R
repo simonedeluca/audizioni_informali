@@ -1,4 +1,9 @@
-library("tidyverse")
+############################
+#   Preprocessing Senato   #
+############################
+
+library(tidyverse)
+library(quanteda)
 
 # Merge the individual dataframes for commissions
 
@@ -47,7 +52,7 @@ for(i in z) {
 }
 
 senato$NOMI[6899] <- gsub("(\\!)", "\\1 ", senato$NOMI[6899]) # aggiungi uno spazio dopo il segno "!"
-senato$NOMI[1359] <- gsub("(\\!)", "i", senato$NOMI[1359]) # aggiungi uno spazio dopo il segno "!"
+senato$NOMI[1359] <- gsub("(\\!)", "i", senato$NOMI[1359])
 
 senato$NOMI[7021] <- gsub("100", "\\1 ", senato$NOMI[7021]) # aggiungi uno spazio dopo il segno "!"
 
@@ -84,13 +89,32 @@ senato$NOMI <- gsub("sanita'", "sanità", senato$NOMI)
 # Eliminiamo il pattern ll'
 senato$NOMI <- gsub("\\b(ll')\\b", "", senato$NOMI)
 
-# Punteggiatura
-# Eliminiamo i punti, facendo collassare lo spazio
-senato$NOMI <- gsub("\\.", "", senato$NOMI)
 
-senato$NOMI <- gsub("\\s+", " ", senato$NOMI) # Rimuovi spazi multipli
+# Processiamo la variabile NOMI - rimozione punteggiatura e stopwords
 
+# La punteggiatura porta significato. Possiamo decidere di eliminarla, perdendo informazione.
+# Eliminiamo specifici segni di punteggiatura, non quelli facenti parte dei nomi degli enti (come #vita, FB&Associati)
+
+senato$NOMI_clean <- gsub("\\.", "", senato$NOMI)
+senato$NOMI_clean <- gsub("[,;'\"()\\-]", " ", senato$NOMI_clean) 
+senato$NOMI_clean <- gsub("\\s+", " ", senato$NOMI_clean) # Rimuovi spazi multipli
+
+# Rimozione stopwords a meno che non siano parte della nomenclatura degli stakeholders.
+stp_wrd <- stopwords('it')
+stp_wrd <- setdiff(stp_wrd, c("una", "nostra"))
+
+# Funzione di pulizia
+pulisci_testo <- function(testo) {
+  for (i in stp_wrd) {
+    testo <- gsub(paste0("\\b", i, "\\b"), "", testo)
+  }
+  testo <- trimws(gsub("\\s+", " ", testo))  # Rimuove spazi multipli e all'inizio/fine della stringa
+  return(testo)
+}
+
+senato$NOMI_clean <- pulisci_testo(senato$NOMI_clean)
 senato <- unique(senato)
+
 
 # La punteggiatura porta significato. Possiamo decidere di eliminarla, perdendo informazione.
 
@@ -122,6 +146,25 @@ senato <- unique(senato)
 # I segni "@" "#" "/" "!" "&" sono parte di nomi di enti
 
 # Eliminiamo specifici segni di punteggiatura, non quelli facenti parte dei nomi degli enti (es: #vita, FB&Associati)
-# senato$NOMI <- gsub("[,'\"()\\-]", " ", senato$NOMI)
 
 write.csv(senato, "[path]/dataset_senato.csv", row.names = FALSE)
+
+
+# Manutenzione dati
+# obiettivo: standardizzare la nomenclacura degli stakeholders
+# applichiamo il metodo del coseno per risolvere i mispelling più ovvi?
+
+
+senato[5821,2] <- "associazione italiana diabetici" # rimosso acronimo in comune
+senato[546,2] <-"tavolo permanente delle federazioni bandistiche italiane"
+
+
+senato[4738,2] <- c("associazioni dei consumatori", "altroconsumo", "unc unione nazionale consumatori", "associazione mo bast!")
+senato[5364,2] <- "transport & environment"
+
+senato[7001,2] <- "associazione italiana promozione scienza aperta"
+senato[732,2] <- "associazione italiana promozione scienza aperta"
+
+
+# Forum terzo settore = Forum nazionale terzo settore
+# Fondazione telethon = telethon
