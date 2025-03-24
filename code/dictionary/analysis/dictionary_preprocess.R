@@ -5,7 +5,7 @@ library(quanteda)
 
 # SOGGETTI ISTITUZIONALI
 
-ist_list <- load("[path]/istitution_list.RData")
+ist_list <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution_list.RData")
 
 # 1. Staccare gli acronimi 
 
@@ -38,7 +38,7 @@ for (i in vec_pulizia) {
 }
 
 stp_wrd <- stopwords('it')
-stp_wrd <- setdiff(stp_wrd, "una")
+stp_wrd <- setdiff(stp_wrd, c("una", "nostra"))
 
 # Pulire ogni vettore della lista per ogni elemento del vettore di pulizia come parola a sé stante
 for (i in stp_wrd) {
@@ -53,11 +53,10 @@ ist_list <- lapply(ist_list, function(x) gsub("\\s+", " ", trimws(x)))
 ist_list <- lapply(ist_list, function(x) x[x != ""])
 
 
-## DIZIONARIO
+# DIZIONARIO
 
-Aggiungiamo al dizionario i vettori usati per descrivere le categorie.
+# Aggiungiamo al dizionario i vettori usati per descrivere le categorie.
 
-```{r dictionary}
 dict <- dictionary(list(v1=ist_list[["v1"]],
                         v2=ist_list[["v2"]],
                         v3=ist_list[["v3"]],
@@ -90,10 +89,18 @@ dict <- dictionary(list(v1=ist_list[["v1"]],
                         carica_ist=ist_list[["carica_ist"]],
                         eu=ist_list[["eu"]]))
 
+# PARTECIPATE STATALI (clean)
+
+part_state <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/part_state.RData")
+
+# DIZIONARIO
+dict[["part_state"]] <- part_state
+
+
 
 # CONFINDUSTRIA
 
-confind_list <- readRDS("[path]/confind_list.RData")
+confind_list <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/confindustria/confind_list.RData")
 
 # Eliminiamo specifici segni di punteggiatura, non quelli facenti parte dei nomi degli enti (come #vita, FB&Associati)
 confind_list <- lapply(confind_list, function(x) gsub("\\.", "", x))
@@ -101,7 +108,7 @@ confind_list <- lapply(confind_list, function(x) gsub("\\.", "", x))
 confind_list <- lapply(confind_list, function(x) gsub("[,;:'\"()\\-]", " ", x))
 
 stp_wrd <- stopwords('it')
-stp_wrd <- setdiff(stp_wrd, "una")
+stp_wrd <- setdiff(stp_wrd, c("una", "nostra"))
 
 # Pulire ogni vettore della lista per ogni elemento del vettore di pulizia come parola a sé stante
 for (i in stp_wrd) {
@@ -121,3 +128,80 @@ dict[["conf_district"]] <- confind_list[["conf_district"]]
 dict[["ass_subsect"]] <- confind_list[["ass_subsect"]]
 dict[["fed_sect"]] <- confind_list[["fed_sect"]]
 dict[["rappr_sect"]] <- confind_list[["rappr_sect"]]
+
+
+# ORDINI PROFESSIONALI (clean)
+ord_prof <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/ordini_pro.RData")
+
+# DIZIONARIO
+dict[["ord_prof"]] <- ord_prof
+
+
+# ORGANIZZAZIONI DI RAPPRESENTANZA
+org_rappr <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/org_rappresentanza.RData")
+
+org_rappr <- tolower(org_rappr)
+
+org_rappr <- gsub("\\.", "", org_rappr)
+org_rappr <- gsub("[,;:'\"()\\-]", " ", org_rappr)
+
+for (i in stp_wrd) {
+  org_rappr <- lapply(org_rappr, function(x) {
+    gsub(paste0("\\b", i, "\\b"), "", x)
+  })
+}
+
+org_rappr <- gsub("\\s+", " ", trimws(org_rappr))
+
+# DIZIONARIO
+dict[["org_rappr"]] <- org_rappr
+
+
+# ORGANIZZAZIONI SOCIETÀ CIVILE
+org_civile <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/org_società-civile.RData")
+
+org_civile <- gsub("\\.", "", org_civile)
+org_civile <- gsub("[,;:'\"()\\-]", " ", org_civile)
+
+for (i in stp_wrd) {
+  org_civile <- lapply(org_civile, function(x) {
+    gsub(paste0("\\b", i, "\\b"), "", x)
+  })
+}
+
+org_civile <- gsub("\\s+", " ", trimws(org_civile))
+
+# DIZIONARIO
+dict[["org_civile"]] <- org_civile
+
+# TEXT ANALYSIS
+
+senato <- read.csv("C:/Users/SImone/Desktop/audizioni_informali/data/senato/clean_data/dataset_senato.csv")
+
+# Creating a quanteda corpus
+corpus <- corpus(senato, text_field = "NOMI_clean")
+tok <- tokens(corpus)
+
+dfm_result <- tokens_lookup(tok, dictionary = dict, nested_scope = "dictionary", exclusive = FALSE) %>% dfm()
+
+result <- as.tibble(dfm_result)
+
+result <- result %>% mutate(sogg_istituz = v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+
+                              v12+v13+v15+v20+v22+v23+v24+v25+v27+v30+v31+v33+
+                              v36+v37+v38+org_enti_local+forze_sicurezza+gradi_militari+
+                              carica_ist+eu,
+                            part_state = part_state,
+                            confindustria = conf_soci+conf_asso+conf_district+ass_subsect+
+                              fed_sect+rappr_sect,
+                            ord_prof = ord_prof,
+                            org_rappr = org_rappr,
+                            org_civile = org_civile,
+                            length = ntoken(dfm_result),
+                            sum = sogg_istituz+part_state+confindustria+ord_prof+org_rappr+org_civile) %>%
+  select(sogg_istituz, part_state, confindustria, ord_prof, org_rappr, org_civile, length, sum)
+
+
+testo_ricomposto <- sapply(tok, function(x) paste(x, collapse = " "))
+result$text <- testo_ricomposto
+
+# 3812 of 7089 = 53,7%

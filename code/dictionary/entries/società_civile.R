@@ -18,16 +18,16 @@ senato <- read.csv("C:/Users/SImone/Desktop/audizioni_informali/data/senato/clea
 # Esploriamo gli enti della società civile nei dati della Camera
 camera <- read.csv("C:/Users/SImone/Desktop/camera.csv")
 
-civile_camera <- camera %>% filter(`Tipologia soggetto`=="Associazioni e organizzazioni della società civile") %>% select(`Ente/Organizzazione`) %>% unique() #df
+civile_camera <- camera %>% filter(`Tipologia.soggetto`=="Associazioni e organizzazioni della società civile") %>% select(`Ente.Organizzazione`) %>% unique() #df
 
 # Costruire espressioni regolari per cercare parole esatte
-patterns <- paste0("\\b", civile_camera$`Ente/Organizzazione`, "\\b")
+patterns <- paste0("\\b", civile_camera$`Ente.Organizzazione`, "\\b")
 
 # Creare un vettore logico per ogni acronimo
 match_logico <- sapply(patterns, function(i) grepl(i, senato$NOMI))
 
 # Estrarre solo gli acronimi che appaiono nei dati come parole a sé stanti o come match esatti.
-org_civil <- civile_camera$`Ente/Organizzazione`[apply(match_logico, 2, any)]
+org_civil <- civile_camera$`Ente.Organizzazione`[apply(match_logico, 2, any)]
 
 # Verifichiamo la bontà delle corrispondenze.
 
@@ -65,9 +65,73 @@ org_civil <- c(org_civil, "assoutenti", "codici", "centro diritti cittadino", "c
 org_civil <- c(org_civil, "anmic", "associazione nazionale mutilati e invalidi civili", "anmil",
                "ente nazionale sordi", "uici", "unione italiana dei ciechi e degli ipovedenti", "anglat")
 
-#saveRDS(org_rappr, file = "[path]/org_società-civile.RData")
+
+# La parola "forum" è un pattern specifico della categoria?
+forum <- senato %>% filter(str_detect(NOMI_clean, "forum")) %>% pull(NOMI_clean) %>% unique()
+
+org_civil <- c(org_civil, "forum associazione donne giuriste", "forum nazionale associazioni genitori scuola - fonags",
+               "federazione degli studenti", "movimento studenti azione cattolica - msac", "unione degli studenti - uds",
+               "forum nazionale associazioni studentesche - fonas", "forum nazionale associazioni genitori scuola - fonags",
+               "forum nazionale educazione musicale", "forum nazionale salviamo il paesaggio difendiamo i territori",
+               "forum italiano movimenti acqua - fima", "forum ex articolo 26", "forum nazionale giovani",
+               "forum disuguaglianze diversità", "forum nazionale servizio civile")
+
+# Il pattern "onlus" (organizzazione non lucrativa di utilità sociale) si può associare alla categoria.
+
+senato %>% filter(str_detect(NOMI_clean, "onlus")) %>% pull(NOMI_clean)
+
+org_civil <- c(org_civil, "organizzazione internazionale protezione animali - oipa", "ataaci", "lav- lega anti vivisezione",
+               "anffas", "federazione italiana superamento handicap - fish", "federfardis", "save the children", "marevivo")
+
+org_civil <- c(org_civil, "fridays for future", "greenpeace", "transparency", "slow food", "actionaid", "differenza donna")
+
+# Movimento, comitato, fondazione...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#saveRDS(org_civil, file = "[path]/org_società-civile.RData")
 
 # Note
-# fand - acronimo comune: federazione tra le associazioni nazionali delle persone con disabilità, associazione italiana diabetici
-# aisa - acronimo comune: associazione italiana promozione scienza aperta, associazione nazionale imprese salute animale
 
+# Acronimi in comune
+# fand: federazione tra le associazioni nazionali delle persone con disabilità, associazione italiana diabetici
+# aisa: associazione italiana promozione scienza aperta, associazione nazionale imprese salute animale
+# adi: associazione dottorandi e dottori di ricerca, associazione degli italianisti, associazione docenti e dirigenti scolastici,
+#      assodanza italia, assemblee di dio in italia, associazione italiana di dietetica e nutrizione medica
+
+# FONAS - Forum Nazionale Associazioni Studentesche
+# È composto da 7 associazioni: Federazione degli Studenti (FdS), Movimento Studenti di Azione Cattolica (MSAC),
+# Movimento Studenti Cattolici (MSC), Movimento Studentesco Nazionale (MSN), Rete degli Studenti Medi (RSM),
+# StudiCentro (SC) e Unione degli Studenti (UdS).
+
+# FONADDS è il Forum delle Associazioni professionali dei Docenti e dei Dirigenti: dove?
+# Ne fanno parte: proteo fare sapere, ADI, AIMC, ANDIS, APEF, CIDI, DIESSE, DISAL, FNISM, IRASE, IRSEF/IRFED, LEGAMBIENTE scuola e formazione, MCE, UCIIM.
+
+# Associazioni Professionali (da aggiungere a org_rappr)
+# proteo, associazione docenti e dirigenti scolastici, associazione italiana maestri cattolici, associazione nazionale dirigenti scolastici - andis,
+# cidi - centro iniziativa democratica insegnanti, diesse - didattica e innovazione scolastica, associazione dirigenti scolastici - disal,
+# dirigenti scuole autonome e libere - disal, mce - movimento di cooperazione educativa, uciim
+
+# Forum arte e spettacolo (FAS) - organizzazione rappresentanza
+# fpa fotografi - organizzazioni rappresentanza
+
+# Forum PA srl - azienda
+
+# Consiglio nazionale dei consumatori e degli utenti (CNCU) - istituzione

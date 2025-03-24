@@ -97,6 +97,7 @@ senato$NOMI <- gsub("\\b(ll')\\b", "", senato$NOMI)
 
 senato$NOMI_clean <- gsub("\\.", "", senato$NOMI)
 senato$NOMI_clean <- gsub("[,;'\"()\\-]", " ", senato$NOMI_clean) 
+senato$NOMI_clean <- gsub("/", " ", senato$NOMI_clean) # aggiunto
 senato$NOMI_clean <- gsub("\\s+", " ", senato$NOMI_clean) # Rimuovi spazi multipli
 
 # Rimozione stopwords a meno che non siano parte della nomenclatura degli stakeholders.
@@ -150,6 +151,7 @@ senato <- unique(senato)
 write.csv(senato, "[path]/dataset_senato.csv", row.names = FALSE)
 
 
+
 # Manutenzione dati
 # obiettivo: standardizzare la nomenclacura degli stakeholders
 # applichiamo il metodo del coseno per risolvere i mispelling più ovvi?
@@ -168,3 +170,8 @@ senato[732,2] <- "associazione italiana promozione scienza aperta"
 
 # Forum terzo settore = Forum nazionale terzo settore
 # Fondazione telethon = telethon
+
+senato[43,2] <- "associazione docenti e dirigenti scolastici italiani"
+senato[1045,2] <- "assemblee di dio in italia"
+
+senato[237,2] <- "actionaid ondata transparency international italia"
