@@ -243,5 +243,24 @@ setdiff(enti_istat, part_state)
 # Aggiungiamo le partecipate in istat
 part_state <- c(part_state, "ricerca sistema energetico", "rse", "ales", "astral", "sviluppumbria")
 
+
+# Save data
 saveRDS(part_state, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/part_state.RData")
 
+
+############################################
+# INTEGRAZIONI: AGGIUNTA DI NUOVI ELEMENTI #
+############################################
+
+
+# Load data
+part_state <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/part_state.RData")
+
+
+# Da script: società_civile
+
+part_state <- c(part_state, "fondazione fs") %>% unique()
+
+
+# Save data
+saveRDS(part_state, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/part_state.RData")

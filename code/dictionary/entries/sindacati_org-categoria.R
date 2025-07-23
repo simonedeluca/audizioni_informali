@@ -368,6 +368,46 @@ org_rappr <- c(org_rappr, reti_rappr, new_org)
 
 org_rappr <- unique(org_rappr) #3
 
-#saveRDS(org_rappr, file = "[path]/org_rappresentanza.RData")
+
+# Save data
+saveRDS(org_rappr, file = "[path]/org_rappresentanza.RData")
 
 
+############################################
+# INTEGRAZIONI: AGGIUNTA DI NUOVI ELEMENTI #
+############################################
+
+
+# Load data
+org_rappr <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/org_rappresentanza.RData")
+
+
+# Da script: società_civile
+
+# FONADDS è il Forum delle Associazioni professionali dei Docenti e dei Dirigenti - organizzazione rappresentanza
+# Ne fanno parte: proteo fare sapere, ADI, AIMC, ANDIS, APEF, CIDI, DIESSE, DISAL, FNISM, IRASE, IRSEF/IRFED, LEGAMBIENTE scuola e formazione, MCE, UCIIM.
+
+# Associazioni Professionali (da aggiungere a org_rappr)
+# proteo, associazione docenti e dirigenti scolastici, associazione italiana maestri cattolici, associazione nazionale dirigenti scolastici - andis,
+# cidi - centro iniziativa democratica insegnanti, diesse - didattica e innovazione scolastica, associazione dirigenti scolastici - disal,
+# dirigenti scuole autonome e libere - disal, mce - movimento di cooperazione educativa, uciim
+
+# forum arte e spettacolo (fas) - organizzazione rappresentanza
+
+vec_rappr <- c("forum associazioni professionali docenti dirigenti", "fonadds",
+               "proteo", "associazione docenti e dirigenti scolastici", "associazione italiana maestri cattolici", "associazione nazionale dirigenti scolastici", "andis",
+               "cidi", "centro iniziativa democratica insegnanti", "diesse", "didattica e innovazione scolastica", "associazione dirigenti scolastici", "disal",
+               "dirigenti scuole autonome e libere", "disal", "mce", "movimento di cooperazione educativa", "uciim",
+               "forum arte e spettacolo", "fas")
+
+# Tra i comitati, abbiamo filtrato i seguenti elementi:
+comit_rappr <- c("comitato bus turistici", "comitato intermagistrature", "comitato unico professioni", "comitato valorizzazione dottorato",
+                 "comitato sindacale ncc fiumicino", "cobti", "comitato nazionale danza arte spettacolo", "condas", "cism",
+                 "comitato italiano scienze motorie", "codim", "comitato docenti indirizzo musicale", "comitato ippico guidatori allenatori",
+                 "ciga", "comitato air", "autonoleggiatori italiani riuniti")
+
+org_rappr <- c(org_rappr, vec_rappr, comit_rappr, "fpa fotografi", "acri") %>% unique()
+
+
+# Save data
+saveRDS(org_rappr, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/org_rappresentanza.RData")

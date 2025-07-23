@@ -45,6 +45,7 @@ v3 <- istat %>% filter(LABEL=="Agenzie fiscali") %>% pull(ENTI)
 v4 <- istat %>% filter(LABEL=="Enti di regolazione dell'attività economica") %>% pull(ENTI)
 v5 <- istat %>% filter(LABEL=="Enti produttori di servizi economici") %>% pull(ENTI)
 v6 <- istat %>% filter(LABEL=="Autorità amministrative indipendenti") %>% pull(ENTI)
+v6 <- c(v6, "banca d'italia")
 v7 <- istat %>% filter(LABEL=="Enti a struttura associativa") %>% pull(ENTI)
 v8 <- istat %>% filter(LABEL=="Enti produttori di servizi assistenziali, ricreativi e culturali") %>% pull(ENTI)
 v9 <- istat %>% filter(LABEL=="Enti e Istituzioni di ricerca") %>% pull(ENTI)
@@ -147,8 +148,7 @@ v38 <- istat %>% filter(LABEL=="Enti nazionali di previdenza e assistenza social
 # Andiamo ad individuare ulteriori gruppi.
 
 # Istituzioni internazionali
-org_int <- c("organizzazione mondiale della sanità", "ocse", "fondo monetario internazionale", "croce rossa", "unicef", "wwf", "save the children")
-# è utile una distinzione tra istituzioni politiche e ong?
+org_int <- c("organizzazione mondiale della sanità", "ocse", "fondo monetario internazionale")
 
 # Europa
 eu <- c("commissione europea", "comitato europeo delle regioni", "banca europea", "corte dei conti europea")
@@ -158,7 +158,7 @@ org_enti_local <- c("conferenza stato regioni", "consiglio regionale", "conferen
 # anpci qui o in associazioni?
 
 # Corpi armati dello Stato
-forze_sicurezza <- c("esercito", "carabinieri", "marina militare", "capitaneri*", "aeronautica", "guardia di finanza", "polizia", "penitenziaria")
+forze_sicurezza <- c("esercito", "carabinieri", "marina militare", "capitaneri*", "aeronautica", "guardia di finanza", "polizia", "penitenziaria", "vigili del fuoco", "vvf")
 
 gradi_militari <- c("gen", "ammiraglio", "col")
 
@@ -191,8 +191,6 @@ geo <- c("mondiale", "internazionale", "europea*", "nazional*", "italia*", "inte
 # Università private/telematiche, in contrapposizione con l'istruzione pubblica
 uni_private <- c("bocconi", "cattolica", "mercatorum", "gregoriana", "telematica", "campus biomedico", "luiss")
 
-# Altri enti (to ask)
-# Dove collocare "vigili del fuoco - vvf", "banca d'italia", "poste italiane", "trenitalia"?
 
 # Lista per il dizionario
 
@@ -201,7 +199,41 @@ ist_list <- list(v1=v1, v2=v2, v3=v3, v4=v4, v5=v5, v6=v6, v7=v7, v8=v8, v9=v9,
                  v23=v23, v24=v24, v25=v25, v27=v27, v30=v30, v31=v31, v33=v33,
                  v36=v36, v37=v37, v38=v38, org_enti_local=org_enti_local,
                  forze_sicurezza=forze_sicurezza,gradi_militari=gradi_militari,
-                 carica_ist=carica_ist, eu=eu)
+                 carica_ist=carica_ist, eu=eu, org_int=org_int)
 
 
+# Save data
 saveRDS(ist_list, file = "[path]/institution_list.RData")
+
+
+############################################
+# INTEGRAZIONI: AGGIUNTA DI NUOVI ELEMENTI #
+############################################
+
+
+# Load data
+ist_list <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution_list.RData")
+
+
+# Da script: società_civile
+
+# Fondazioni e comitati di natura istituzionale
+fond_ist <- c("fondazione inarcassa", "direttore fondazione scuola beni attività culturali sbac", "fondazione agrion",
+              "fondazione slala", "fondazione scuola beni attività culturali", "sbac", "orchestra roma lazio", "ico")
+
+comit_ist <- c("comitato europeo regioni", "comitato sindaci amministratori lazio abruzzo sicurezza caro pedaggi a24 a25",
+               "edufin", "comitato nazionale universitario", "cnu", "comitato apprendimento pratico musica studenti",
+               "cnapm", "conferenza direttori conservatori musica", "comitato tecnico scientifico" , "comitato olimpico nazionale italiano",
+               "coni", "comitato tecnico paralimpico", "cip", "comitato esperti", "comitato organizzativo milano cortina",
+               "comitato nazionale bioetica", "comitato scientifico futuro europa")
+
+# Aggiunta dei vettori alla lista
+ist_list$fond_ist = fond_ist
+ist_list$comit_ist = comit_ist
+ist_list$new_vec = c("consiglio nazionale dei consumatori e degli utenti", "CNCU")
+
+
+# Save data
+saveRDS(ist_list, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution_list.RData")
+
+
