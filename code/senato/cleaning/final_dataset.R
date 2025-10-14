@@ -149,37 +149,3 @@ senato <- unique(senato)
 # Eliminiamo specifici segni di punteggiatura, non quelli facenti parte dei nomi degli enti (es: #vita, FB&Associati)
 
 write.csv(senato, "[path]/dataset_senato.csv", row.names = FALSE)
-
-
-
-# Manutenzione dati
-# obiettivo: standardizzare la nomenclacura degli stakeholders
-# applichiamo il metodo del coseno per risolvere i mispelling più ovvi?
-
-# se applichiamo le modifiche, bisogna ripetere le operazioni di pulizia dei nomi.
-
-senato[5821,2] <- "associazione italiana diabetici" # rimosso acronimo in comune
-senato[546,2] <- "tavolo permanente delle federazioni bandistiche italiane"
-
-
-senato[4738,2] <- "associazioni dei consumatori, altroconsumo, unc unione nazionale consumatori, associazione mo bast!"
-senato[5364,2] <- "transport & environment"
-
-senato[7001,2] <- "associazione italiana promozione scienza aperta"
-senato[732,2] <- "associazione italiana promozione scienza aperta"
-
-
-# Forum terzo settore = Forum nazionale terzo settore
-
-senato[43,2] <- "associazione docenti e dirigenti scolastici italiani"
-senato[1045,2] <- "assemblee di dio in italia"
-
-senato[237,2] <- "actionaid - ondata - transparency international italia"
-
-senato[82,2] <- "fondazione promozione sociale onlus"
-
-senato[2691,2] <- "comitato apprendimento pratico musica studenti cnapm, conferenza direttori conservatori musica"
-senato[5719,2] <- "legambiente, pro natura, comitato vigilanza sul nucleare del piemonte"
-
-senato[7085,2] <- "associazione air italia agenti immobiliari riuniti"
-senato[2967,2] <- "associazione produttori esecutivi"

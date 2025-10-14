@@ -199,8 +199,6 @@ privati <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/
 dict[["privati"]] <- privati
 
 
-
-
 # TEXT ANALYSIS
 
 senato <- read.csv("C:/Users/SImone/Desktop/audizioni_informali/data/senato/clean_data/dataset_senato.csv")
@@ -212,25 +210,6 @@ tok <- tokens(corpus)
 dfm_result <- tokens_lookup(tok, dictionary = dict, nested_scope = "dictionary", exclusive = FALSE) %>% dfm()
 
 result <- as.tibble(dfm_result)
-
-result <- result %>% mutate(sogg_istituz = v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+
-                              v12+v13+v15+v20+v22+v23+v24+v25+v27+v30+v31+v33+
-                              v36+v37+v38+org_enti_local+forze_sicurezza+gradi_militari+
-                              carica_ist+eu+fond_ist+comit_ist+new_vec,
-                            part_state = part_state,
-                            confindustria = conf_soci+conf_asso+conf_district+ass_subsect+
-                              fed_sect+rappr_sect,
-                            ord_prof = ord_prof,
-                            org_rappr = org_rappr,
-                            org_civile = org_civile,
-                            esperti = experts,
-                            centri_ricerca = centri_ricerca,
-                            privati = privati,
-                            length = ntoken(dfm_result),
-                            sum = sogg_istituz+part_state+confindustria+ord_prof+org_rappr+org_civile+esperti+
-                              centri_ricerca+privati) %>%
-  select(sogg_istituz, part_state, confindustria, ord_prof, org_rappr, org_civile, esperti, centri_ricerca, privati, length, sum)
-
 
 # Categorie aggregate
 result <- result %>% mutate(sogg_istituz = v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+
@@ -252,34 +231,28 @@ result <- result %>% mutate(sogg_istituz = v1+v2+v3+v4+v5+v6+v7+v8+v9+v10+v11+
 testo_ricomposto <- sapply(tok, function(x) paste(x, collapse = " "))
 result$text <- testo_ricomposto
 
-# 3812 of 7089 = 53,7%
-# 4507 of 7089 = 63,5%
-
-result <- result %>%
-  rowwise() %>%
-  mutate(
-    values = list(c(sogg_istituz, part_state, org_rappr, org_civile, esperti, centri_ricerca, privati)),
-    labels = list(c("sogg_istituz", "part_state", "org_rappr", "soc_civile", "esperti", "centri_ricerca", "privati")),
-    
-    max_val = max(values), #quante corrispondenze ha avuto la categoria più rappresentata nella riga
-    n_max = sum(values == max_val), #quante volte compare il numero massimo nella riga
-    
-    label = if (max_val == 0) {
-      "NC"
-    } else if (n_max > 1) {
-      "pareggio"
-    } else {
-      labels[which.max(values)]
-    }
-  ) %>%
-  ungroup() %>%
-  select(sogg_istituz, part_state, org_rappr, org_civile, esperti, centri_ricerca, privati, length, sum, text, label) 
-
-library(ggplot2)
-
-ggplot(result, aes(label)) +
-  geom_bar()
+# 4792 of 7089 = 67,6%
 
 
-ggplot(result) +
-  geom_bar(aes(y = label))
+# creo il primo volume del dizionario
+dizionario_pt1 <- dictionary(list(
+  istituzioni = unlist(dict[c(
+    "v1","v2","v3","v4","v5","v6","v7","v8","v9","v10","v11",
+    "v12","v13","v15","v20","v22","v23","v24","v25","v27","v30","v31","v33",
+    "v36","v37","v38","org_enti_local","forze_sicurezza","gradi_militari",
+    "carica_ist","eu","fond_ist","comit_ist","new_vec")]),
+  part_statali = dict[["part_state"]],
+  soc_civile = dict[["org_civile"]],
+  esperti = dict[["experts"]],
+  centr_ricerca = dict[["centri_ricerca"]],
+  privati = dict[["privati"]]
+  ))
+
+dizionario_pt1[["rappr"]] <- c(org_rappr, ord_prof, confind_list[["conf_soci"]], confind_list[["conf_asso"]],
+                               confind_list[["conf_district"]], confind_list[["ass_subsect"]],
+                               confind_list[["fed_sect"]], confind_list[["rappr_sect"]])
+
+
+# salvo volume dizionario e primi risultati
+saveRDS(dizionario_pt1, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dizionario_pt1.RData")
+saveRDS(result, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/result_pt1.RData")
