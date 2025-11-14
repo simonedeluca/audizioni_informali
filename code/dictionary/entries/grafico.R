@@ -1,3 +1,5 @@
+library(tidyverse)
+library(quanteda)
 library(ggplot2)
 
 # Manutenzione dataset
