@@ -237,3 +237,165 @@ ist_list$new_vec = c("consiglio nazionale dei consumatori e degli utenti", "CNCU
 saveRDS(ist_list, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution_list.RData")
 
 
+# Revisione dizionario
+
+# In parallelo alla costruzione del codebook, aggiorniamo le liste dei sottotipi nella categoria,
+# alla luce delle risultanze della prima classificazione degli attori, in particolare dei casi
+# ambigui.
+
+
+dict_ist <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution_list.RData")
+
+# Organi costituzionali, di rilievo costituzionale, giurisdizionali e di controllo
+dict_ist[["v1"]] <- c(dict_ist[["v1"]], "corte di cassazione")
+dict_ist[["v1"]] <- dict_ist[["v1"]][-c(1,7,8)]
+
+# Presidenza del Consiglio dei ministri e Ministeri
+dict_ist[["v2"]] <- dict_ist[["v2"]][-c(1,2,4,5,6,7)]
+dict_ist[["v2"]] <- c(dict_ist[["v2"]], "presidenza del consiglio dei ministri")
+
+# Agenzie fiscali
+dict_ist[["v3"]]
+
+# Enti di regolazione dell’attività economica
+dict_ist[["v4"]] <- dict_ist[["v4"]][
+  !str_detect(dict_ist[["v4"]], fixed("s.p.a."))
+  ]
+
+# Enti produttori di servizi economici
+dict_ist[["v5"]] <- dict_ist[["v5"]][
+  !str_detect(dict_ist[["v5"]], fixed("s.p.a."))
+]
+dict_ist[["v5"]] <- dict_ist[["v5"]][-c(1,2,4,6:8,10:14)]
+
+# Autorità amministrative indipendenti
+dict_ist[["v6"]] <- c(dict_ist[["v6"]], "banca d'italia")
+dict_ist[["v6"]] <- dict_ist[["v6"]][-c(10)]
+
+# Enti a struttura associativa
+dict_ist[["v7"]] <- dict_ist[["v7"]][-c(2:4)]
+dict_ist[["v7"]] <- c(dict_ist[["v7"]], "ancim - associazione nazionale comuni isole minori",
+                      "anpci - associazione nazionale piccoli comuni italiani")
+
+# Enti pubblici culturali, ricreativi e sportivi
+dict_ist[["v8"]] <- dict_ist[["v8"]][-5]
+dict_ist[["v8"]] <- dict_ist[["v8"]][
+  !str_detect(dict_ist[["v8"]], fixed("s.p.a."))
+  ]  
+dict_ist[["v8"]] <- dict_ist[["v8"]][-c(1:3,6:19)]
+dict_ist[["v8"]] <- c(dict_ist[["v8"]], "parco archeologico", "fondazione ottavio ziino orchestra di roma e del lazio")
+
+# Enti e istituzioni di ricerca
+
+# Istituti zooprofilattici italiani
+
+# Enti locali - v11:v13,v15
+dict_ist[["enti_locali"]] <- c(dict_ist[["v11"]], dict_ist[["v12"]], dict_ist[["v13"]], dict_ist[["v15"]])
+dict_ist <- dict_ist[-c(11,12,13,14)]
+dict_ist[["enti_locali"]] <- dict_ist[["enti_locali"]][-24]
+dict_ist[["enti_locali"]] <- c(dict_ist[["enti_locali"]], "regione")
+
+# Aziende, enti e strutture del SSN
+dict_ist[["v20"]] <- c("ssuem 118", "ares 118", "areu lombardia", "sistema 118", "centrale operativa 118", "118 sassari")
+
+# Autorità di sistema portuale
+
+# Aziende ospedaliere, aziende ospedaliero-universitarie, policlinici e istituti di ricovero e cura a carattere scientifico pubblici
+
+# Azienda sanitaria locale
+
+# Camere di commercio
+
+dict_ist <- dict_ist[-c(16)]
+
+# Agenzie ed enti regionali, provinciali e interregionali per l’ambiente, territorio, ricerca e formazione
+dict_ist[["v30"]] <- c("arpa", "istituto regionale per la floricoltura", "agenzia provinciale per le risorse idriche e l’energia della provincia autonoma di trento", "Agenzia provinciale per l’ambiente e la tutela del clima della provincia autonoma di bolzano", "aipo")
+
+# Autorità di bacino del distretto idrografico
+
+# Consorzi interuniversitari di ricerca
+
+# Università e istituti di istruzione universitaria statali
+
+# Enti nazionali di previdenza e assistenza sociale
+dict_ist[["v38"]] <- dict_ist[["v38"]][c(21,22)]
+
+# Organizzazioni internazionali
+dict_ist[["org_int"]] <- c("organizzazione mondiale della sanità animale", "ocse", "fondo monetario internazionale", "world customs organization")
+
+# Istituzioni e organismi dell'Unione Europea
+dict_ist[["eu"]][3] <- "banca europea per gli investimenti"
+dict_ist[["eu"]] <- c(dict_ist[["eu"]], "bce")
+
+# Organismi di raccordo
+dict_ist[["org_enti_local"]] <- dict_ist[["org_enti_local"]][-5]
+dict_ist[["org_raccordo"]] <- dict_ist[["org_enti_local"]]
+dict_ist <- dict_ist[-c(22)]
+
+# Corpi armati dello Stato
+dict_ist[["forze_sicurezza"]] <- c("capitaneri*", "polizia", "carabinieri", "guardia di finanza", "vigili del fuoco")
+dict_ist[["corpi_armati"]] <- dict_ist[["forze_sicurezza"]]
+dict_ist <- dict_ist[-c(22)]
+
+# Fondazioni istituzionali
+dict_ist[["fond_ist"]] <- c("sbac", "fondazione scuola per i beni e le attività culturali", "agrion", "fondazione ottavio ziino orchestra di roma e del lazio")
+
+# Comitati istituzionali
+dict_ist[["comit_ist"]] <- dict_ist[["comit_ist"]][-c(1,4,5,10:13,15)]
+
+dict_ist <- dict_ist[-c(27)]
+
+# Reti e associazioni tematiche di enti territoriali
+dict_ist[["reti_territori"]] <- c("associazione nazionale città del tartufo", "associazione città dell'olio", "aicc", "associazione italiana città della ceramica",
+                                "associazione la strada della ceramica in umbria", "associazione borghi più belli d'italia")
+
+# Università e istituti di istruzione universitaria non statali
+dict_ist[["uni_non_statali"]] <- c("università bocconi", "università cattolica", "università mercatorum", "università gregoriana", "università telematica", "campus biomedico", "luiss")
+
+# Ruoli istituzionali
+
+# Gradi militari
+dict_ist[["gradi_militari"]] <- c("gen", "ten", "ammiraglio", "ispettore", "comandante")
+
+# Cariche istituzionali
+dict_ist[["carica_ist"]] <- c("presidente del consiglio" , "ministro" , "vice ministr*" , "sottosegretario" , "sindaco" , "assessore" , "senatore" , "ambasciatore" , "amb", "console" ,
+                              "capo di gabinetto" , "commissario ad acta" , "commissari* straordinari*", "commissari designati", "commissario per la messa in sicurezza", "commissaria europea",
+                              "commissario generale sezione expo", "cons")
+
+
+# Save data
+saveRDS(dict_ist, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution_list-revised.RData")
+
+###
+
+vec_ist <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution_list-revised.RData")
+
+# Misclassificazioni di categoria in istituzioni
+
+
+# Camere di commercio
+vec_ist[["v25"]] <- c(vec_ist[["v25"]], "camere commercio")
+
+# Enti a struttura associativa
+vec_ist[["v7"]] <- c(vec_ist[["v7"]], "unioncamere", "assocamerestero")
+
+# Enti di ricerca e organismi tecnico-scientifici
+vec_ist[["v9"]] <- c(vec_ist[["v9"]], "ente italiano normazione", "uni", "uninfo") # flag enti
+
+# Organismi di raccordo istituzionale
+vec_ist[["org_raccordo"]] <- c(vec_ist[["org_raccordo"]], "coordinamento presidenti corsi laurea scienze formazione primaria", "coordinamento presidenti corsi laurea educatore socio pedagogico pedagogista",
+                               "conferenza presidenti conservatori musica", "conferenza direttori conservatori musica", "cpcsai", "cnsi", "consulta società scientifiche") # flag enti
+
+# Reti e associazioni tematiche di enti territoriali
+vec_ist[["reti_territori"]] <- c(vec_ist[["reti_territori"]], "associazione nazionale comuni aeroportuali")
+
+# Enti pubblici culturali, ricreativi e sportivi
+vec_ist[["v8"]] <- c(vec_ist[["v8"]], "aci", "automobile club d italia", "club alpino italiano", "lega navale italiana", "aero club", "anmli")
+
+# Enti produttori di servizi economici
+vec_ist[["v5"]] <- c(vec_ist[["v5"]], "siae")
+
+# Save data
+saveRDS(vec_ist, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution_list-revised.RData") # need preprocessing
+
+# Qual è lo scarto tra il vettore istituzioni nel dizionario completo e institution_list_revised???

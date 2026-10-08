@@ -411,3 +411,118 @@ org_rappr <- c(org_rappr, vec_rappr, comit_rappr, "fpa fotografi", "acri") %>% u
 
 # Save data
 saveRDS(org_rappr, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/org_rappresentanza.RData")
+
+
+# Revisione dizionario
+
+# In parallelo alla costruzione del codebook, ripassiamo alcune scelte dubbie.
+
+
+# Abbiamo individuato 5 sottotipi nella categoria:
+# 1. Sindacati e organizzazioni di tutela collettiva
+# 2. Associazioni datoriali, imprenditoriali e settoriali 
+# 3. Associazioni professionali, ordini e organismi professionali di settore
+# 4. Consorzi, filiere, distretti e cluster produttivi
+# 5. Reti, alleanze, coordinamenti, movimenti e comitati categoriali
+
+
+# La lista degli attori nella categoria è stata ottenuta dalla combinazione di tre sessioni di lavoro:
+# 1. dizionario_pt1: contiene galassia confindustria e ordini professionali
+# 2. dizionario_babele
+# 3. dict10
+
+# In totale, si registrano 1530 voci ma gli attori unici sono verosimilmente di meno.
+# Più che standardizzare le nomenclature, ci interessa correggere le misclassificazioni.
+
+
+
+
+
+
+
+
+
+
+
+privati <- c("energia nazionale", "8puntozero")
+
+cat_to_civil <- c("confconsumatori", "touring club italiano", "associazione campeggiatori turistici d italia", "unpli")
+
+ss_cr <- c("associazione italiana studio prevenzione analisi crimine",
+           "aistec", "associazione italiana psicologia giuridica", "federazione medico sportiva italiana",
+           "commissione italiana insegnamento matematica", "ciim",
+           "commissione didattica nazionale coordinamento società storiche",
+           "associazione italiana arbitrato")
+# flag expertise al sottogruppo
+
+
+
+# rimuovere "cluster tecnologico nazionale energia ctne" da centri di ricerca
+
+
+# pt.3
+
+civile <- c("convol", "csvnet", "link2007", "equogarantito", "acli", "enil", "federazione italiana caccia")
+
+ss <- c("siml", "aifm", "fimeuc", "sivae", "airp", "goal") #expertise
+
+
+# Carchiamo il vettore dal dizionario completo
+
+dizionario_babele <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dizionario_babele.RData")
+dizionario_pt1 <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dizionario_pt1.RData")
+dict10 <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dict10.RData")
+
+dizionario <- c(dizionario_pt1, dizionario_babele, dict10)
+
+cat3 <- dizionario[["rappr"]] %>% unique()
+
+# Eseguiamo le modifiche
+
+# Pattern da aggiungere
+to_add <- c("nidil", #sindacati
+            "enci", "italia solare", #ba
+            "raai", "green building council italia", "riders italia", "riders decreto", "movimento docenti motivati formazione continua", #reti
+            "comitato nazionale specializzandi sostegno", "stabilizzazione docenti 180x3", "coordinamento nazionale precari scuola", "docenti precari scuola",
+            "cluster tecnologico nazionale energia ctne") 
+
+# flag: italia solare, green building council italia, cluster tecnologico nazionale energia ctne, associazione degli italianisti, fondazione italia cina,
+#       diesse - didattica e innovazione scolastica, cidi - centro iniziativa democratica insegnanti, mce - movimento di cooperazione educativa, proteo, uciim
+
+cat3 <- c(cat3, to_add)
+
+# Pattern da rimuovere:
+to_remove <- c("associazione italiana arbitrato camera arbitrale milano", "camera commercio", "unioncamere", "assocamerestero",
+               "associazione nazionale comuni aeroportuali", "aci", "automobile club d'italia", "siae", "confconsumatori",
+               "associazione campeggiatori turistici d italia", "unpli", "associazione italiana studio prevenzione analisi crimine",
+               "aistec", "associazione italiana psicologia giuridica", "federazione medico sportiva italiana",
+               "commissione didattica nazionale coordinamento società storiche", "consulta società scientifiche",
+               "coordinamento presidenti corsi laurea scienze formazione primaria",
+               "coordinamento presidenti corsi laurea educatore socio pedagogico pedagogista conclep",
+               "centro studi coordinamento industrie beni consumo", "automobile club d italia", "touring club italiano",
+               "energia nazionale", "aps", "8puntozero", "convol", "csvnet", "link2007", "equogarantito", "acli", "enil",
+               "federazione italiana caccia", "siml", "aifm", "fimeuc", "sivae", "airp", "goal")
+cat3 <- setdiff(cat3, to_remove)
+
+
+# Contare quante volte ogni stringa della voce "categoria" compare nei dati
+
+classifica_categoria3 <- tibble(pattern = cat3) %>%
+  rowwise() %>%
+  mutate(
+    pattern_regex = str_c("\\b", str_escape(pattern), "\\b"),
+    n_match = sum(str_detect(senato$NOMI_clean, regex(pattern_regex, ignore_case = TRUE)))
+  ) %>%
+  ungroup() %>%
+  select(-pattern_regex) %>%
+  arrange(desc(n_match))
+
+# Solo stringhe con corrispondenza
+vec_cat <- classifica_categoria3 %>%
+  filter(n_match > 0) %>%
+  pull(pattern)
+
+vec_cat <- c(vec_cat, "sindacat*", "sindacal*", "unione industrial*", "doc/it")
+
+saveRDS(vec_cat, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/vec_categoria-revised.RData")
+

@@ -98,16 +98,16 @@ org_civile <- c(org_civile, "forum associazione donne giuriste", "forum nazional
 
 # forum arte e spettacolo (fas) - organizzazione rappresentanza
 
-#vec_rappr <- c("forum associazioni professionali docenti dirigenti", "fonadds",
-#               "proteo", "associazione docenti e dirigenti scolastici", "associazione italiana maestri cattolici", "associazione nazionale dirigenti scolastici", "andis",
-#               "cidi", "centro iniziativa democratica insegnanti", "diesse", "didattica e innovazione scolastica", "associazione dirigenti scolastici", "disal",
-#               "dirigenti scuole autonome e libere", "disal", "mce", "movimento di cooperazione educativa", "uciim",
-#               "forum arte e spettacolo", "fas")
+vec_rappr <- c("forum associazioni professionali docenti dirigenti", "fonadds",
+               "proteo", "associazione docenti e dirigenti scolastici", "associazione italiana maestri cattolici", "associazione nazionale dirigenti scolastici", "andis",
+               "cidi", "centro iniziativa democratica insegnanti", "diesse", "didattica e innovazione scolastica", "associazione dirigenti scolastici", "disal",
+               "dirigenti scuole autonome e libere", "disal", "mce", "movimento di cooperazione educativa", "uciim",
+               "forum arte e spettacolo", "fas")
 
 
 # INSERZIONE azienda privata
 
-#privati <- "forum pa"
+privati <- "forum pa"
 
 
 
@@ -133,12 +133,12 @@ fond_senato <- senato %>% filter(str_detect(NOMI_clean, "fondazione")) %>% pull(
 # Altrimenti, chi li finanzia o controlla? Che funzione svolgono?
 
 fond_civile <- fond_senato[c(1,3,5,7:9,12,14,16:19,23,27,31:35)]
-#fond_ricerca <- fond_senato[c(2,4,10,24,29,30,38)]
-#fond_ist <- fond_senato[c(6,25,28)]
+fond_ricerca <- fond_senato[c(2,4,10,24,29,30,38)]
+fond_ist <- fond_senato[c(6,25,28)]
 
 fond_civile <- c(fond_civile, "fondazione bellisario", "telethon")
-#fond_ricerca <- c(fond_ricerca, "fondazione ricerca salute")
-#fond_ist <- c(fond_ist, "fondazione scuola beni attività culturali", "sbac", "orchestra roma lazio", "ico")
+fond_ricerca <- c(fond_ricerca, "fondazione ricerca salute")
+fond_ist <- c(fond_ist, "fondazione scuola beni attività culturali", "sbac", "orchestra roma lazio", "ico")
 
 
 # COMITATI
@@ -146,21 +146,20 @@ fond_civile <- c(fond_civile, "fondazione bellisario", "telethon")
 comit_senato <- senato %>% filter(str_detect(NOMI_clean, "comitato")) %>% pull(NOMI_clean) %>% unique()
 
 comit_civile <- comit_senato[c(1,3,4,5,6,7,10,26,27,28,29,30,31,32,33,34,35,40,41,49)]
-#comit_rappr <- comit_senato[c(2,8,9,22,45)]
-#comit_ist <- comit_senato[c(11,38)]
+comit_rappr <- comit_senato[c(2,8,9,22,45)]
+comit_ist <- comit_senato[c(11,38)]
 
 # invece di aggiungere la stringa (che può contenere altre info come il nome e il ruolo della persona
 # in rappresentanza dell'ente), salviamo solo l'ente nel vettore giusto; e isoliamo gli acronimi.
 
 comit_civile <- c(comit_civile, "comitato trenitalia nuorese", "comitato vigilanza nucleare")
-#comit_rappr <- c(comit_rappr, "cobti", "comitato nazionale danza arte spettacolo", "condas", "cism", "comitato italiano scienze motorie",
-#                 "codim", "comitato docenti indirizzo musicale", "comitato ippico guidatori allenatori", "ciga", "comitato air",
-#                 "autonoleggiatori italiani riuniti")
-#comit_ist <- c(comit_ist, "edufin", "comitato nazionale universitario", "cnu", "comitato apprendimento pratico musica studenti", "cnapm",
-#               "conferenza direttori conservatori musica", "comitato tecnico scientifico", "comitato olimpico nazionale italiano", "coni",
-#               "comitato tecnico paralimpico", "cip", "comitato esperti", "comitato organizzativo milano cortina", "comitato nazionale bioetica",
-#               "comitato scientifico futuro europa")
-#comit_ricerca <- c("accademia georgofili", "comitato glaciologico italiano")
+comit_rappr <- c(comit_rappr, "cobti", "comitato nazionale danza arte spettacolo", "condas", "cism", "comitato italiano scienze motorie",
+                 "codim", "comitato docenti indirizzo musicale", "comitato ippico guidatori allenatori", "ciga", "comitato air",
+                 "autonoleggiatori italiani riuniti")
+comit_ist <- c(comit_ist, "edufin", "comitato nazionale universitario", "cnu", "comitato apprendimento pratico musica studenti", "cnapm",
+               "conferenza direttori conservatori musica", "comitato tecnico scientifico", "comitato olimpico nazionale italiano", "coni",
+               "comitato tecnico paralimpico", "cip", "comitato esperti", "comitato organizzativo milano cortina", "comitato nazionale bioetica",               "comitato scientifico futuro europa")
+comit_ricerca <- c("accademia georgofili", "comitato glaciologico italiano")
 
 
 # Aggiungiamo altre organizzazioni
@@ -183,8 +182,8 @@ saveRDS(org_civile, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dic
 # "fondazione fs" in partecipate
 
 # Nuove categorie:
-# centri_ricerca <- c(fond_ricerca, comit_ricerca, "censis")
-# privati <- "forum pa"
+centri_ricerca <- c(fond_ricerca, comit_ricerca, "censis")
+privati <- "forum pa"
 
 
 
@@ -202,3 +201,111 @@ saveRDS(org_civile, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dic
 
 
 # unione superiore maggiori d italia - chiesa, inserita in società civile, meglio in altro?
+
+
+
+
+# Revisione
+
+# Partiamo dal vettore nel dizionario
+
+dizionario_babele <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dizionario_babele.RData")
+dizionario_pt1 <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dizionario_pt1.RData")
+dict10 <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dict10.RData")
+
+dizionario <- c(dizionario_pt1, dizionario_babele, dict10)
+civil <- dizionario[["soc_civile"]]
+
+# Carichiamo il vettore 'Istituzioni'
+ist <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution_list-revised.RData")
+
+# istituzioni: centro regionale s alessio, museo egizio, museo glauco lombardi
+ist[["v20"]] <- c(ist[["v20"]], "centro regionale s alessio") # Aziende, enti e strutture sociosanitarie
+ist[["v8"]] <- c(ist[["v8"]], "museo egizio", "museo glauco lombardi") # Enti pubblici culturali, ricreativi e sportivi
+ist <- unlist(ist)
+
+# Rimozioni da s. civile
+intersect(civil, ist)
+civile <- setdiff(civil, ist)
+
+# Rimozioni da ist
+ist <- ist[ist != "astral"]
+ist <- ist[ist != "sviluppumbria"]
+
+# salviamo il vettore istituzioni
+saveRDS(ist, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/institutions/institution-revised.RData")
+
+
+# Carichiamo il vettore 'Categoria'
+cat <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/vec_categoria-revised.RData")
+
+# controlliamo gli elementi in comune
+misclass <- intersect(cat, civile)
+# rimozione da civile
+civile <- setdiff(civile, misclass)
+cat <- cat[cat != "fima"]
+
+# Spostiamo gli attori misclassificati in civile senza dividerli nei sottotipi di categoria.
+
+cat <- c(cat, "federazione italiana mercanti arte", "colap", "civita", "nuovo imaie", "fondazione nazionale ricerca commercialisti", "fondazione sviluppo sostenibile",
+         "associazione principesca", "comitato venezia lavora", "facciamo la conta", "coordinamento free", "gbc italia",
+         "ampress", "parks", "liberi uguali", "airicerca", "attrici attori uniti", "granosalus", "research4life",
+         "modomo", "cnps", "cresco", "aeranti corallo", "valore d",
+         "comitato idonei vvf", "comitato idonei vvf 250", "comitato sud italia docenti precari terza fascia", "comitato docenti idonei ruolo suppletive concorso 2016",
+         "comitato spontaneo concorso dsga", "comitato uniti terza fascia", "comitato difendiamo concorso dsga",
+         "varie associazioni precari", "docenti ruolo ingabbiati ogni ordine grado percorsi abilitanti", "docenti precari a066",
+         "docenti precari scuola pordenone", "comunicato diritti docenti senza 180x3", "gruppi facebook docenti terza fascia 2020",
+         "docenti didattica musica gruppo operativo ddm go", "movimento dignità docenza universitaria",
+         "rete 29 aprile", "insegnanti formati preparati",
+         "associazione riders decreto", "riders union bologna",
+         "european dance union", "danza error system", "parks liberi uguali", "lea liberi editori autori", "ampress attività motoria prevenzione sviluppo salute")
+
+# flag categoria: fire, fondazione nazionale ricerca commercialisti, fondazione sviluppo sostenibile, gbc italia, italia solare, airicerca, research4life
+
+intersect(cat, civile)
+civile <- setdiff(civile, cat)
+
+# salviamo il vettore categoria
+saveRDS(cat, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/cat_revised_up.RData")
+
+
+
+# Centri studi (con expertise) in Altro
+
+centri_studi <- c("fondazione italia digitale", "fondazione gimbe", "fondazione astrid", "fondazione centro studi doc", "associazione italiana promozione scienza aperta",
+                  "acbs", "airdm", "centro studi livatino")
+
+# Società scientifiche (con expertise) in Altro
+
+soc_scientifiche <- c("adapt", "aidlass", "sigg", "simeu", "siot", "sifo", "sirm", "sinpia", "fimar", "aiom", "sit")
+
+altro <- c(centri_studi, soc_scientifiche)
+
+intersect(civile, altro)
+
+civile <- setdiff(civile, altro)
+civile <- c(civile, "pro test italia")
+
+# salviamo altro
+saveRDS(altro, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/vec_altro.RData")
+
+
+# Privati
+
+privati <- c("proges", "coopculture")
+intersect(civile, privati)
+civile <- setdiff(civile, privati)
+
+# salviamo privati
+saveRDS(privati, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/vec_privati.RData")
+
+
+# Expertise in civile: opera nazionale montessori. isde, centro italiano riqualificazione fluviale, patto per la scienza, ail, aism, onap, fondazione una, telethon, macula, asvis
+
+# salviamo civile aggiornato
+saveRDS(civile, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/civile_update.RData")
+
+
+
+
+

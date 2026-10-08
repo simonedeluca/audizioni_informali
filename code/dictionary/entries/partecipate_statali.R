@@ -264,3 +264,28 @@ part_state <- c(part_state, "fondazione fs") %>% unique()
 
 # Save data
 saveRDS(part_state, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/part_state.RData")
+
+
+# Confrontiamo il vettore delle partecipate nel dizionario completo e part_state
+dizionario_babele <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dizionario_babele.RData")
+dizionario_pt1 <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dizionario_pt1.RData")
+dict10 <- readRDS(file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/dict10.RData")
+
+dizionario <- c(dizionario_pt1, dizionario_babele, dict10)
+dizionario[["part_statali"]] # 96 elementi
+
+part_state <- readRDS("C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/part_state.RData") # 86
+
+# La lista parte dalle liste precedenti e maniene solo gli attori presenti nei dati. 
+vec_part <- c("ENI", "ENEL", "Saipem", "Snam", "Terna", "Italgas", "GSE", "Gestore dei servizi energetici", "SOGIN", "Società gestione impianti nucleari", "RSE", "Ricerca sul sistema energetico", "Acquirente Unico", "A2A", "ACEA", "SIDRA", "CVA", "Compagnia valdostana delle acque",
+              "FS", "Ferrovie dello stato", "RFI", "Rete ferroviaria italiana", "Trenitalia", "ANAS", "ENAV", "ITA Airways", "Italia trasporto aereo", "italia trasportoaereo", "Alitalia", "Italia trasporto aereo", "TELT", "Pedemontana veneta", "ADR", "SEA Aeroporti Milano", "ASTRAL", "RAM", "Rete autostrade mediterranee",
+              "Banca Monte dei Paschi di Siena", "CDP", "Cassa depositi e prestiti", "SACE", "SIMEST", "INVITALIA", "Agenzia nazionale per l’attrazione degli investimenti e lo sviluppo d’impresa", "SOSE", "Soluzioni per il sistema economico", "BMTI", "Borsa merci telematica italiana", "CONSAP", "Concessionaria servizi assicurativi pubblici",
+              "Poste Italiane", "CONSIP", "SOGEI", "Società generale d’informatica", "PagoPA", "Open Fiber", "Infratel", "ANPAL", "SIN", "Sviluppo lavoro Italia", "ENIT",
+              "Leonardo", "STMicroelectronics",
+              "RAI", "Radiotelevisione italiana", "ALES", "Sport e salute", "Fondazione FS", "Zetema progetto cultura",
+              "Sviluppumbria")
+vec_part <- tolower(vec_part)
+
+
+saveRDS(vec_part, file = "C:/Users/SImone/Desktop/audizioni_informali/data/dictionary/vec_partecipate-revised.RData")
+
